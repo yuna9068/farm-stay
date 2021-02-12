@@ -14,4 +14,7 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
   },
+  globals: {
+    '$': true, // 定義需要的 global variables，避免出現 '$' is not defined
+  },
 };
