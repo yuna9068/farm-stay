@@ -6,9 +6,6 @@ import store from './store';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-window.jQuery = require('jquery');
-window.$ = require('jquery');
-
 Vue.config.productionTip = false;
 
 new Vue({
