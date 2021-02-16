@@ -1,20 +1,28 @@
 <template>
   <div id="app">
+    <NavbarMain/>
     <router-view/>
   </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
+import NavbarMain from '@/components/NavbarMain.vue';
 
 export default {
   name: 'App',
+  components: {
+    NavbarMain,
+  },
   mounted() {
-    this.getFarm(); // 若在 created() 執行，有機會無法關閉 Loading
+    // 若在 created() 執行 getFarm()，有機會無法關閉 Loading
+    this.getFarm();
   },
   methods: {
     ...mapActions(['saveFarm']),
-    /** 取得所有農場資料 */
+    /**
+     * 取得所有農場資料
+     */
     getFarm() {
       this.$loading.show();
 
