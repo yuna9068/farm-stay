@@ -27,7 +27,7 @@ export default {
       this.$loading.show();
 
       const vm = this;
-      const apiFarm = 'http://192.168.43.19:3000/api/farm-stay';
+      const apiFarm = 'https://machi-cat.herokuapp.com/api/farm-stay';
 
       $.ajax({
         method: 'GET',
