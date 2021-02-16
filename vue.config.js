@@ -21,4 +21,11 @@ module.exports = {
       })
     ]
   },
+  css: {
+    loaderOptions: {
+      scss: {
+        additionalData: `@import "bootstrap/scss/bootstrap";`
+      }
+    }
+  }
 }
