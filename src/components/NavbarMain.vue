@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
     <button
-      class="navbar-toggler button-menu position-absolute"
+      class="navbar-toggler position-absolute buttonMenu"
       type="button"
       data-toggle="collapse"
       data-target="#navbarContent"
@@ -52,7 +52,7 @@
             class="btn btn-outline-light"
             type="button"
             id="searchFarm"
-            @click="searchFarm"
+            @click="clickSearch"
           >查詢</button>
         </div>
       </div>
@@ -72,11 +72,11 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['searchFarmName']),
+    ...mapActions(['searchFarm']),
     /**
      * 點擊查詢按鈕，判斷要 顯示搜尋框 還是 執行搜尋
      */
-    searchFarm() {
+    clickSearch() {
       if (!this.searchDisplay) {
         this.showSearch(true);
       } else {
@@ -96,7 +96,10 @@ export default {
      * 篩選符合搜尋字串的農場景點
      */
     filterFarm() {
-      this.searchFarmName(this.searchText);
+      this.searchFarm({
+        type: 'keyword',
+        value: this.searchText,
+      });
       this.searchText = '';
     },
   },
@@ -104,7 +107,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.button-menu {
+.buttonMenu {
   top: 0.5rem;
   left: 1rem;
 }
