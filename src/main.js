@@ -5,6 +5,10 @@ import store from './store';
 
 import 'bootstrap';
 
+import pluginLoading from './plugins/loading';
+
+Vue.use(pluginLoading);
+
 Vue.config.productionTip = false;
 
 new Vue({

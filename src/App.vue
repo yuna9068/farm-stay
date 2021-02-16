@@ -9,16 +9,18 @@ import { mapActions } from 'vuex';
 
 export default {
   name: 'App',
-  created() {
-    this.getFarm();
+  mounted() {
+    this.getFarm(); // 若在 created() 執行，有機會無法關閉 Loading
   },
   methods: {
     ...mapActions(['saveFarm']),
-    /**
-     * 取得所有農場資料
-     */
+    /** 取得所有農場資料 */
     getFarm() {
+      this.$loading.show();
+
+      const vm = this;
       const apiFarm = 'http://192.168.43.19:3000/api/farm-stay';
+
       $.ajax({
         method: 'GET',
         url: apiFarm,
@@ -27,7 +29,7 @@ export default {
       }).fail((response) => {
         console.log('fail: ', response);
       }).always(() => {
-        console.log('hide loading');
+        vm.$loading.hide();
       });
     },
   },
