@@ -63,7 +63,7 @@ export default new Vuex.Store({
 
       result.unshift({
         countyName: '全部',
-        townName: '全部',
+        townName: ['全部'],
       });
 
       state.regionList = result;
