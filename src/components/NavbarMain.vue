@@ -1,5 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center">
+  <nav
+    id="navbarMain"
+    class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center"
+  >
     <button
       class="navbar-toggler position-absolute buttonMenu"
       type="button"
@@ -19,19 +22,13 @@
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/">
-            <a class="nav-link" href="#">首頁</a>
-          </router-link>
+          <router-link to="/" class="nav-link">首頁</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/">
-            <a class="nav-link" href="#">收藏景點</a>
-          </router-link>
+          <router-link to="/" class="nav-link">收藏景點</router-link>
         </li>
         <li class="nav-item">
-          <router-link to="/">
-            <a class="nav-link" href="#">特別感謝</a>
-          </router-link>
+          <router-link to="/" class="nav-link">特別感謝</router-link>
         </li>
       </ul>
     </div>
@@ -64,7 +61,7 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'Navbar',
+  name: 'NavbarMain',
   data() {
     return {
       searchDisplay: false, // 搜尋框顯示狀態
