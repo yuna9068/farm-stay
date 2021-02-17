@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 @include media-breakpoint-down(xs) {
-  .container-md {
+  .col {
     padding: 0;
   }
 
@@ -51,7 +51,7 @@ export default {
 }
 
 .card-img-overlay {
-  background: rgba(0, 0, 0, .4);
+  background: rgba(0, 0, 0, 0.4);
   top: initial;
 }
 </style>
