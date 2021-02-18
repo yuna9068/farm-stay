@@ -98,7 +98,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['searchFarm']),
+    ...mapActions(['updateSearchCondition', 'searchFarm']),
     /**
      * 選擇的縣市
      */
@@ -117,18 +117,19 @@ export default {
      * 篩選符合搜尋字串的農場景點
      */
     search() {
-      this.searchFarm({
+      this.updateSearchCondition({
         type: 'keyword',
         value: this.filterKeyword,
       });
-      this.searchFarm({
+      this.updateSearchCondition({
         type: 'county',
         value: this.filterCounty,
       });
-      this.searchFarm({
+      this.updateSearchCondition({
         type: 'town',
         value: this.filterTown,
       });
+      this.searchFarm();
     },
   },
   computed: {

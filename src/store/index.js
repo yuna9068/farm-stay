@@ -102,10 +102,16 @@ export default new Vuex.Store({
       context.commit('FILTERFARM');
     },
     /**
+     * 更新搜尋條件
+     */
+    updateSearchCondition(context, payload) {
+      context.commit('SEARCHCONDITION', payload);
+    },
+    /**
      * 查詢符合搜尋條件的農場景點
      */
-    searchFarm(context, payload) {
-      context.commit('SEARCHCONDITION', payload);
+    searchFarm(context) {
+      // context.commit('SEARCHCONDITION', payload);
       context.commit('FILTERFARM');
     },
   },

@@ -25,16 +25,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['searchFarm']),
+    ...mapActions(['updateSearchCondition', 'searchFarm']),
     /**
      * 篩選符合搜尋縣市的農場景點
      */
     selectRegion(item) {
       this.selected = item.countyName;
-      this.searchFarm({
+      this.updateSearchCondition({
         type: 'county',
         value: item.countyName,
       });
+      this.searchFarm();
     },
   },
   computed: {

@@ -49,7 +49,7 @@
             class="btn btn-outline-light"
             type="button"
             id="searchFarm"
-            @click="clickSearch"
+            @click="clickSearch()"
           >查詢</button>
         </div>
       </div>
@@ -69,7 +69,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['searchFarm']),
+    ...mapActions(['updateSearchCondition', 'searchFarm']),
     /**
      * 點擊查詢按鈕，判斷要 顯示搜尋框 還是 執行搜尋
      */
@@ -93,11 +93,11 @@ export default {
      * 篩選符合搜尋字串的農場景點
      */
     filterFarm() {
-      this.searchFarm({
+      this.updateSearchCondition({
         type: 'keyword',
         value: this.searchText,
       });
-      this.searchText = '';
+      this.searchFarm();
     },
   },
 };
