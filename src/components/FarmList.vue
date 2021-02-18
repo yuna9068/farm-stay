@@ -1,5 +1,12 @@
 <template>
   <div class="container-md">
+    <div
+      v-show="getRegionList.length > 0 && getFilterFarm.length == 0"
+      class="alert alert-primary text-center mt-3 mt-sm-0"
+      role="alert"
+    >
+      無符合查詢條件的資料
+    </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
       <div class="col mb-sm-4" v-for="farm in getFilterFarm" :key="farm.ID">
         <div class="card bg-light border-white h-100">
@@ -29,7 +36,7 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'FarmList',
   computed: {
-    ...mapGetters(['getFilterFarm']),
+    ...mapGetters(['getRegionList', 'getFilterFarm']),
   },
 };
 </script>
@@ -48,6 +55,10 @@ export default {
       border-radius: 0;
     }
   }
+}
+
+.card {
+  min-height: 200px;
 }
 
 .card-img-overlay {
