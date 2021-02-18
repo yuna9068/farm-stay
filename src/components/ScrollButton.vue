@@ -2,14 +2,14 @@
   <div class="scrollButton position-fixed d-flex">
     <button
       type="button"
-      class="btn text-info border-0 rounded-circle font-weight-bolder mr-3"
+      class="btn text-info border-0 rounded-circle font-weight-bolder mr-3 shadow-none"
       @click="toTop()"
     >
       &#9650;
     </button>
     <button
       type="button"
-      class="btn text-info border-0 rounded-circle font-weight-bolder"
+      class="btn text-info border-0 rounded-circle font-weight-bolder shadow-none"
       @click="toBottom()"
     >
       &#9660;
@@ -61,9 +61,6 @@ $transition-time: 0.4s;
     opacity: 0;
     transform: rotate(360deg);
     transition: all $transition-time linear;
-    &:focus {
-      box-shadow: none;
-    }
   }
   &.enter {
     opacity: 1;

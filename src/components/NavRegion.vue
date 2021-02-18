@@ -1,5 +1,5 @@
 <template>
-  <ul class="nav nav-pills flex-nowrap overflow-auto">
+  <ul class="nav nav-pills flex-nowrap overflow-auto d-sm-none">
     <li class="nav-item" v-for="(item, i) in getRegionList" :key="`county${i}`">
       <a
         href="#"
