@@ -117,6 +117,10 @@ export default {
      * 篩選符合搜尋字串的農場景點
      */
     search() {
+      if (this.filterCounty === '縣市') {
+        this.selectCounty(this.getRegionList[0]);
+      }
+
       this.updateSearchCondition({
         type: 'keyword',
         value: this.filterKeyword,
