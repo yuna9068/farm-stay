@@ -13,6 +13,7 @@ export default new Vuex.Store({
       town: '',
     },
     filterFarm: [], // 首頁顯示的農場清單
+    selectedFarm: {}, // 使用者點選的農場詳細資料
   },
   getters: {
     /**
@@ -32,6 +33,12 @@ export default new Vuex.Store({
      */
     getFilterFarm(state) {
       return state.filterFarm;
+    },
+    /**
+     * 取得使用者點選的農場詳細資料
+     */
+    getSelectedFarm(state) {
+      return state.selectedFarm;
     },
   },
   mutations: {
@@ -91,6 +98,9 @@ export default new Vuex.Store({
 
       state.filterFarm = list;
     },
+    SELECTEDFARM(state, payload) {
+      state.selectedFarm = payload;
+    },
   },
   actions: {
     /**
@@ -113,6 +123,12 @@ export default new Vuex.Store({
     searchFarm(context) {
       // context.commit('SEARCHCONDITION', payload);
       context.commit('FILTERFARM');
+    },
+    /**
+     * 更新使用者點選的農場詳細資料
+     */
+    updateSelectedFarm(context, payload) {
+      context.commit('SELECTEDFARM', payload);
     },
   },
   modules: {

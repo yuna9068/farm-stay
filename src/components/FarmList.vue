@@ -9,7 +9,7 @@
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
       <div class="col mb-sm-4" v-for="farm in getFilterFarm" :key="farm.ID">
-        <div class="card bg-light border-white h-100">
+        <div class="card bg-light border-white h-100" @click="showDetail(farm)">
           <img v-if="farm.Image" class="card-img" :src="farm.Image" :alt="farm.Name">
           <img
             v-else
@@ -17,7 +17,7 @@
             src="@/assets/images/chasing-lin-forest_during_day_photo-unsplash.jpg"
             :alt="farm.Name"
           >
-          <div class="card-img-overlay d-flex align-items-center rounded-0">
+          <div class="card-img-overlay d-flex align-items-center">
             <h5 class="card-title mb-0 mr-auto text-white">{{ farm.Name }}</h5>
             <div class="farmRegion ml-2 text-right text-light">
               <p class="card-text mb-1 text-nowrap">{{ farm.CountyName }}</p>
@@ -31,10 +31,20 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FarmList',
+  methods: {
+    ...mapActions(['updateSelectedFarm']),
+    /**
+     * 進入農場詳細資訊頁
+     */
+    showDetail(farm) {
+      this.updateSelectedFarm(farm);
+      this.$router.push('/farm');
+    },
+  },
   computed: {
     ...mapGetters(['getRegionList', 'getFilterFarm']),
   },
@@ -59,10 +69,13 @@ export default {
 
 .card {
   min-height: 200px;
+  cursor: pointer;
 }
 
 .card-img-overlay {
   background: rgba(0, 0, 0, 0.4);
   top: initial;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 </style>
