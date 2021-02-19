@@ -31,45 +31,57 @@
         </div>
 
         <div class="col-12 col-md-5 col-lg-4">
-          <ul class="p-3 text-break roundedCustomer">
+          <ul class="p-3 text-break roundedCustomer farmInfo">
             <li v-if="farm.AddrDisplay">
-              <a :href="mapUrl(farm.AddrDisplay)" target="_blank" class="text-white">
+              <i class="fas fa-map-marker-alt"></i>
+              <a :href="mapUrl(farm.AddrDisplay)" target="_blank">
                 {{ farm.AddrDisplay }}
               </a>
             </li>
             <li v-if="farm.TelDisplay">
-              <a
-                v-for="tel in telArray"
-                :key="tel"
-                :href="formatTelHref(tel)"
-                class="d-flex text-white"
-              >
-                {{ tel }}
-              </a>
+              <i class="fas fa-phone-alt"></i>
+              <div>
+                <a
+                  v-for="tel in telArray"
+                  :key="tel"
+                  :href="formatTelHref(tel)"
+                  class="d-block"
+                >
+                  {{ tel }}
+                </a>
+              </div>
             </li>
             <li v-if="farm.Email">
-              <a
-                v-for="mail in mailArray"
-                :key="mail"
-                :href="`mailto:${mail}`"
-                class="d-flex text-white"
-              >
-                {{ mail }}
-              </a>
+              <i class="fas fa-envelope"></i>
+              <div>
+                <a
+                  v-for="mail in mailArray"
+                  :key="mail"
+                  :href="`mailto:${mail}`"
+                  class="d-block"
+                >
+                  {{ mail }}
+                </a>
+              </div>
             </li>
             <li v-if="farm.FBUrl">
-              <a :href="farm.FBUrl" target="_blank" class="text-white">
+              <i class="fab fa-facebook"></i>
+              <a :href="farm.FBUrl" target="_blank">
                 {{ farm.FBUrl }}
               </a>
             </li>
             <li v-if="farm.UrlDisplay">
-              <a :href="farm.UrlDisplay" target="_blank" class="text-white">
+              <i class="fas fa-globe"></i>
+              <a :href="farm.UrlDisplay" target="_blank">
                 {{ farm.UrlDisplay }}
               </a>
             </li>
-            <li v-if="farm.OpenTimeList.length > 0" class="text-white">
-              開放時間
-              <ul class="px-3 mt-2">
+            <li v-if="farm.OpenTimeList.length > 0">
+              <i class="fas fa-clock"></i>
+              <span>開放時間</span>
+            </li>
+            <li>
+              <ul class="pl-4 pr-3">
                 <li
                   v-for="(item, i) in farm.OpenTimeList"
                   :key="`weekDay${i}`"
@@ -172,30 +184,41 @@ export default {
 <style lang="scss" scoped>
 $darkenPrimary: darken($primary, 25%);
 
-ul {
-  list-style: none;
-  background: $darkenPrimary;
-  li {
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
-    a {
-      &:hover {
-        text-decoration: none;
-      }
-    }
-  }
-}
-
 .breadcrumb-item, .farmName {
   color: $darkenPrimary;
 }
 
-.farmContent {
-  letter-spacing: 0.2rem;
+.roundedCustomer {
+  border-radius: 0.5rem;
 }
 
-.roundedCustomer {
-  border-radius: 1rem;
+.farmInfo {
+  list-style: none;
+  background: $darkenPrimary;
+  li {
+    display: flex;
+    color: #ffffff;
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+    a {
+      color: #ffffff;
+      margin-bottom: 0.5rem;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    span {
+      vertical-align: middle;
+    }
+    svg {
+      margin-right: 0.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+.farmContent {
+  letter-spacing: 0.2rem;
 }
 </style>

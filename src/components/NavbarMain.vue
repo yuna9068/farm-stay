@@ -4,7 +4,7 @@
     class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center"
   >
     <button
-      class="navbar-toggler position-absolute buttonMenu"
+      class="navbar-toggler position-absolute px-0 border-0 buttonMenu"
       type="button"
       data-toggle="collapse"
       data-target="#navbarContent"
@@ -47,11 +47,13 @@
         >
         <div class="input-group-append">
           <button
-            class="btn btn-outline-light"
+            class="btn border-0 text-white-50"
             type="button"
             id="searchFarm"
             @click="clickSearch()"
-          >查詢</button>
+          >
+            <i class="fas fa-search"></i>
+          </button>
         </div>
       </div>
     </form>
@@ -126,10 +128,8 @@ form {
     }
   }
   #searchFarm {
-    border-color: $navbar-dark-toggler-border-color;
     &:focus, &:hover {
       box-shadow: none;
-      color: $light;
       background: transparent;
     }
   }

@@ -5,6 +5,7 @@ import store from './store';
 
 import 'bootstrap';
 
+import './plugins/fontAwesome';
 import pluginLoading from './plugins/loading';
 
 Vue.use(pluginLoading);
