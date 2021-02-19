@@ -33,7 +33,7 @@
       </ul>
     </div>
 
-    <form class="form-inline d-sm-none position-absolute">
+    <form class="form-inline d-sm-none position-absolute" @submit.prevent>
       <div class="input-group justify-content-end">
         <input
           type="text"
@@ -43,6 +43,7 @@
           aria-label="搜尋農場名稱"
           aria-describedby="searchFarm"
           v-model="searchText"
+          @keyup.enter.prevent
         >
         <div class="input-group-append">
           <button

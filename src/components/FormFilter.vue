@@ -1,6 +1,6 @@
 <template>
   <div class="container-md mt-3 d-none d-sm-block">
-    <form>
+    <form @submit.prevent>
       <div class="form-row">
         <div class="form-group col-sm-3">
           <input
@@ -11,6 +11,7 @@
             aria-describedby="helpId"
             placeholder="搜尋農場名稱"
             v-model="filterKeyword"
+            @keyup.enter.prevent
           >
         </div>
 
