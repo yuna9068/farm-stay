@@ -38,7 +38,7 @@
         <input
           type="text"
           class="form-control inputSearch flex-grow-0"
-          :class="{'searchActive': searchDisplay , 'p-0 border-0': !searchDisplay}"
+          :class="{'btn-outline-light searchActive': searchDisplay, 'p-0 border-0': !searchDisplay}"
           placeholder="搜尋農場名稱"
           aria-label="搜尋農場名稱"
           aria-describedby="searchFarm"
@@ -47,7 +47,11 @@
         >
         <div class="input-group-append">
           <button
-            class="btn border-0 text-white-50"
+            class="btn"
+            :class="{
+              'text-white btn-outline-light': searchDisplay,
+              'text-white-50 border-0': !searchDisplay,
+            }"
             type="button"
             id="searchFarm"
             @click="clickSearch()"
@@ -127,9 +131,8 @@ form {
 
 .input-group {
   .inputSearch {
-    border-color: $navbar-dark-toggler-border-color;
     width: 0px;
-    transition: width 1s, padding 1s;
+    transition: width 0.5s, padding 0.5s;
     &.searchActive {
       width: calc(100% - 58px);
       transition: width 1s, padding 1s;

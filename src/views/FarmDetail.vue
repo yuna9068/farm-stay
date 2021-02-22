@@ -76,7 +76,7 @@
                 {{ farm.UrlDisplay }}
               </a>
             </li>
-            <li v-if="farm.OpenTimeList.length > 0">
+            <li v-if="farm.OpenTimeList && farm.OpenTimeList.length > 0">
               <i class="fas fa-clock"></i>
               <span>開放時間</span>
             </li>

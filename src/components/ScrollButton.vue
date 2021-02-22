@@ -64,7 +64,7 @@ $transition-time: 0.4s;
   }
   &.enter {
     opacity: 1;
-    right: 20px;
+    right: 10%;
     transition: all $transition-time linear;
     .btn {
       opacity: 1;
