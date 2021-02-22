@@ -21,13 +21,13 @@
 
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
+        <li class="nav-item" @click="collapsedMenu()">
           <router-link to="/" class="nav-link">首頁</router-link>
         </li>
-        <li class="nav-item">
-          <router-link to="/" class="nav-link">收藏景點</router-link>
+        <li class="nav-item" @click="collapsedMenu()">
+          <router-link to="/favorites" class="nav-link">收藏景點</router-link>
         </li>
-        <li class="nav-item">
+        <li class="nav-item" @click="collapsedMenu()">
           <router-link to="/" class="nav-link">特別感謝</router-link>
         </li>
       </ul>
@@ -101,6 +101,14 @@ export default {
         value: this.searchText,
       });
       this.searchFarm();
+    },
+    /**
+     * 點選連結後自動收合選單
+     */
+    collapsedMenu() {
+      if ($('.buttonMenu').is(':visible')) {
+        $('.buttonMenu').click();
+      }
     },
   },
 };

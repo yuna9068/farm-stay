@@ -14,6 +14,7 @@ export default new Vuex.Store({
     },
     filterFarm: [], // 首頁顯示的農場清單
     selectedFarm: {}, // 使用者點選的農場詳細資料
+    favoritesList: [], // 收藏景點清單
   },
   getters: {
     /**
@@ -39,6 +40,12 @@ export default new Vuex.Store({
      */
     getSelectedFarm(state) {
       return state.selectedFarm;
+    },
+    /**
+     * 取得收藏景點清單
+     */
+    getFavoritesList(state) {
+      return state.favoritesList;
     },
   },
   mutations: {
@@ -101,6 +108,14 @@ export default new Vuex.Store({
     SELECTEDFARM(state, payload) {
       state.selectedFarm = payload;
     },
+    FAVORITESLIST(state, { type, target }) {
+      if (type === 'add') {
+        state.favoritesList.push(target);
+      } else {
+        const removeIndex = state.favoritesList.findIndex((item) => item.ID === target.ID);
+        state.favoritesList.splice(removeIndex, 1);
+      }
+    },
   },
   actions: {
     /**
@@ -121,7 +136,6 @@ export default new Vuex.Store({
      * 查詢符合搜尋條件的農場景點
      */
     searchFarm(context) {
-      // context.commit('SEARCHCONDITION', payload);
       context.commit('FILTERFARM');
     },
     /**
@@ -129,6 +143,24 @@ export default new Vuex.Store({
      */
     updateSelectedFarm(context, payload) {
       context.commit('SELECTEDFARM', payload);
+    },
+    /**
+     * 加入收藏景點清單
+     */
+    addFavorites(context, payload) {
+      context.commit('FAVORITESLIST', {
+        type: 'add',
+        target: payload,
+      });
+    },
+    /**
+     * 從收藏景點清單中移除
+     */
+    removeFavorites(context, payload) {
+      context.commit('FAVORITESLIST', {
+        type: 'remove',
+        target: payload,
+      });
     },
   },
   modules: {
