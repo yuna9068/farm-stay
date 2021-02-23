@@ -1,23 +1,18 @@
 <template>
-  <div
-    class="modal fade"
-    id="modalLoading"
-    data-backdrop="static"
-    data-keyboard="false"
-    tabindex="-1"
-    aria-describedby="Loading"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content bg-transparent border-0">
-        <div class="modal-body text-center">
-          <div
-            class="spinner-grow mx-2 mx-sm-3 text-primary"
-            role="status"
-            v-for="i in 5"
-            :key="`spinner${i}`"
-          >
-            <span class="sr-only">Loading...</span>
+  <div class="modalLoading">
+    <div class="modal-backdrop fade" :class="{'show': display}"></div>
+    <div class="modal fade" :class="{'show': display}">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-transparent border-0">
+          <div class="modal-body text-center">
+            <div
+              class="spinner-grow mx-2 mx-sm-3 text-primary"
+              role="status"
+              v-for="i in 5"
+              :key="`spinner${i}`"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
           </div>
         </div>
       </div>
@@ -28,18 +23,23 @@
 <script>
 export default {
   name: 'Loading',
+  data() {
+    return {
+      display: false,
+    };
+  },
   methods: {
     /**
      * 顯示 Loading
      */
     show() {
-      $('#modalLoading').modal('show');
+      this.display = true;
     },
     /**
      * 隱藏 Loading
      */
     hide() {
-      $('#modalLoading').modal('hide');
+      this.display = false;
     },
   },
 };
@@ -47,6 +47,17 @@ export default {
 
 <style lang="scss" scoped>
 $delay-time: 0.2;
+
+.modal-backdrop {
+  z-index: -1;
+  &.show {
+    z-index: initial;
+  }
+}
+
+.modal.show {
+  display: block;
+}
 
 .spinner-grow {
   animation-duration: (5 * $delay-time) + s;
