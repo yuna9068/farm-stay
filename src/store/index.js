@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import photo from '@/assets/json/photo.json';
 
 Vue.use(Vuex);
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
     filterFarm: [], // 首頁顯示的農場清單
     selectedFarm: {}, // 使用者點選的農場詳細資料
     favoritesList: [], // 收藏景點清單
+    photoData: photo, // 預設圖片資料
   },
   getters: {
     /**
@@ -46,6 +48,12 @@ export default new Vuex.Store({
      */
     getFavoritesList(state) {
       return state.favoritesList;
+    },
+    /**
+     * 取得預設圖片資料
+     */
+    getPhotoData(state) {
+      return state.photoData;
     },
   },
   mutations: {
