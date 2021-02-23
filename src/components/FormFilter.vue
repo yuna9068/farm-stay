@@ -1,5 +1,5 @@
 <template>
-  <div class="container-md mt-3 d-none d-sm-block">
+  <div class="container-md pt-3 d-none d-sm-block">
     <form @submit.prevent>
       <div class="form-row">
         <div class="form-group col-sm-3">
@@ -19,7 +19,7 @@
           <button
             id="filterCounty"
             class="
-              btn dropdown-toggle w-100 shadow-none
+              btn dropdown-toggle w-100 shadow-none bg-white
               d-flex justify-content-between align-items-center
             "
             type="button"
@@ -48,7 +48,7 @@
           <button
             id="filterTown"
             class="
-              btn dropdown-toggle w-100 shadow-none
+              btn dropdown-toggle w-100 shadow-none bg-white
               d-flex justify-content-between align-items-center
             "
             type="button"

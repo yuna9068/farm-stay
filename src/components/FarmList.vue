@@ -8,21 +8,20 @@
       無符合查詢條件的資料
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
-      <div class="col mb-sm-4" v-for="farm in getFilterFarm" :key="farm.ID">
+      <div
+        v-for="farm in getFilterFarm"
+        :key="farm.ID"
+        class="col-11 col-md-6 mb-2 mb-sm-4"
+      >
         <div
-          class="card bg-transparent border-white justify-content-center overflow-hidden"
+          class="card bg-transparent border-0 justify-content-center overflow-hidden"
           @click="showDetail(farm)"
         >
-          <img v-if="farm.Image" class="card-img" :src="farm.Image" :alt="farm.Name">
-          <img
-            v-else
-            class="card-img"
-            src="@/assets/images/chasing-lin-forest_during_day_photo-unsplash.jpg"
-            :alt="farm.Name"
-          >
+          <img class="card-img" loading="lazy" :src="farm.Image" :alt="farm.Name">
+          <div class="cardImgBlur" :style="{'background-image': `url(${farm.Image})`}"/>
           <div class="card-img-overlay d-flex">
-            <h5 class="card-title mb-0 mr-auto text-white">{{ farm.Name }}</h5>
-            <div class="farmRegion ml-2 text-right text-light">
+            <h5 class="card-title mb-0 mr-auto">{{ farm.Name }}</h5>
+            <div class="farmRegion ml-2 text-right">
               <p class="card-text mb-1 text-nowrap">{{ farm.CountyName }}</p>
               <p class="card-text text-nowrap">{{ farm.TownshipName }}</p>
             </div>
@@ -30,18 +29,12 @@
           <button
             type="button"
             class="btn position-absolute p-0 border-0 rounded-circle d-flex shadow-none btnHeart"
+            @click.stop="compareFavorites(farm.ID) ? removeItem(farm) : addItem(farm)"
           >
             <font-awesome-icon
-              v-show="compareFavorites(farm.ID)"
-              :icon="['fas', 'heart']"
-              class="m-auto text-white"
-              @click.stop="removeItem(farm)"
-            />
-            <font-awesome-icon
-              v-show="!compareFavorites(farm.ID)"
-              :icon="['far', 'heart']"
-              class="m-auto text-white"
-              @click.stop="addItem(farm)"
+              :icon="compareFavorites(farm.ID) ? ['fas', 'heart'] : ['far', 'heart']"
+              class="m-auto"
+              :class="compareFavorites(farm.ID) ? 'text-danger' : 'text-secondary'"
             />
           </button>
         </div>
@@ -66,6 +59,11 @@ export default {
       this.updateSelectedFarm(farm);
       this.$router.push('/farm');
     },
+    /**
+     * 比對是否已被加入到收藏清單
+     *
+     * @param {number} farmId - 農場 Id
+     */
     compareFavorites(farmId) {
       const compareIndex = this.getFavoritesList.findIndex((item) => item.ID === farmId);
       if (compareIndex < 0) {
@@ -98,10 +96,10 @@ export default {
 
 <style lang="scss" scoped>
 .card {
-  height: 30vh;
+  height: 245px;
   cursor: pointer;
-  &::before {
-    content: '';
+  box-shadow: $box-shadow-sm;
+  &ImgBlur {
     position: absolute;
     top: 0;
     left: 0;
@@ -109,8 +107,7 @@ export default {
     height: 100%;
     z-index: -1;
     background: center / cover no-repeat;
-    background-image: url('~@/assets/images/chasing-lin-forest_during_day_photo-unsplash.jpg');
-    filter: blur(5px);
+    filter: blur(10px);
   }
   &:hover {
     box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.4);
@@ -118,10 +115,11 @@ export default {
 }
 
 .card-img-overlay {
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(255, 255, 255, 0.8);
   top: initial;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
+  border-top: 6px solid $primary;
 }
 
 .btnHeart {
@@ -131,11 +129,15 @@ export default {
   z-index: 2;
   width: 2.5rem;
   height: 2.5rem;
+  background: #ffffff;
+  svg {
+    height: 1rem;
+  }
 }
 
 @include media-breakpoint-down(xs) {
-  .col {
-    padding: 0;
+  .row {
+    justify-content: center;
   }
 
   .card {

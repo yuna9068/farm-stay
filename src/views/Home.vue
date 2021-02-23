@@ -23,3 +23,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.home {
+  min-height: calc(100vh - 56px);
+  background-color: rgba(0, 0, 0, 0.05);
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
   <nav
     id="navbarMain"
-    class="navbar navbar-expand-sm navbar-dark bg-primary justify-content-center"
+    class="navbar navbar-expand-sm navbar-light justify-content-center shadow-sm"
   >
     <button
       class="navbar-toggler position-absolute px-0 border-0 buttonMenu"
@@ -16,7 +16,7 @@
     </button>
 
     <router-link to="/" class="navbar-brand mx-auto">
-      <h1>來到農村住一晚</h1>
+      <h1 class="text-primary">來到農村住一晚</h1>
     </router-link>
 
     <div class="collapse navbar-collapse" id="navbarContent">
@@ -49,8 +49,7 @@
           <button
             class="btn"
             :class="{
-              'text-white btn-outline-light': searchDisplay,
-              'text-white-50 border-0': !searchDisplay,
+              'btn-outline-light': searchDisplay,
             }"
             type="button"
             id="searchFarm"
@@ -127,6 +126,7 @@ export default {
 h1 {
   font-size: 1.25rem;
   margin-bottom: initial;
+  line-height: initial;
 }
 
 form {
