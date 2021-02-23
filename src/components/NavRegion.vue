@@ -5,7 +5,6 @@
         href="#"
         class="nav-link rounded-0 text-nowrap"
         :class="{
-          'text-white-50': selected !== item.countyName,
           'active': selected === item.countyName
         }"
         @click="selectRegion(item)"
@@ -45,10 +44,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.nav-link {
-  background: $nav-pills-link-active-bg;
-  &.active {
-    color: $nav-pills-link-active-color;
+.nav-pills {
+  .nav-link {
+    color: #607d8b;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 0.25rem;
+      background: $primary;
+      border-radius: 50rem;
+      transition: all 0.8s;
+    }
+    &.active {
+      position: relative;
+      background: transparent;
+      color: #000000;
+      &::after {
+        width: 80%;
+        left: 10%;
+        transition: all 0.8s;
+      }
+    }
   }
 }
 </style>

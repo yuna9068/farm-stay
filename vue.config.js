@@ -4,28 +4,28 @@ module.exports = {
   publicPath: process.env.NODE_ENV === 'production'
     ? '/farm-stay/'
     : '/',
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config
       .plugin('html')
-      .tap(args => {
-        args[0].title = '來到農村住一晚'
-        return args
-      })
+      .tap((args) => {
+        args[0].title = '來到農村住一晚';
+        return args;
+      });
   },
   configureWebpack: {
     plugins: [
       new webpack.ProvidePlugin({
-        $: "jquery",
-        jQuery: "jquery",
-        "windows.jQuery": "jquery"
-      })
-    ]
+        $: 'jquery',
+        jQuery: 'jquery',
+        'windows.jQuery': 'jquery',
+      }),
+    ],
   },
   css: {
     loaderOptions: {
       scss: {
-        additionalData: `@import "bootstrap/scss/bootstrap";`
-      }
-    }
-  }
-}
+        additionalData: '@import "bootstrap/scss/bootstrap";',
+      },
+    },
+  },
+};

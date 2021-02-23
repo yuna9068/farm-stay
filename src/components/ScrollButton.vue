@@ -2,14 +2,14 @@
   <div class="scrollButton position-fixed d-flex">
     <button
       type="button"
-      class="btn text-info border-0 rounded-circle font-weight-bolder mr-3 shadow-none"
+      class="btn text-primary border-0 rounded-circle font-weight-bolder mr-3 shadow-none"
       @click="toTop()"
     >
       &#9650;
     </button>
     <button
       type="button"
-      class="btn text-info border-0 rounded-circle font-weight-bolder shadow-none"
+      class="btn text-primary border-0 rounded-circle font-weight-bolder shadow-none"
       @click="toBottom()"
     >
       &#9660;

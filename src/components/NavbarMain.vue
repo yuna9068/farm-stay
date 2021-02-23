@@ -15,8 +15,8 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <router-link to="/">
-      <a class="navbar-brand mx-auto" href="#">來到農村住一晚</a>
+    <router-link to="/" class="navbar-brand mx-auto">
+      <h1>來到農村住一晚</h1>
     </router-link>
 
     <div class="collapse navbar-collapse" id="navbarContent">
@@ -122,6 +122,11 @@ export default {
 .buttonMenu {
   top: 0.5rem;
   left: 1rem;
+}
+
+h1 {
+  font-size: 1.25rem;
+  margin-bottom: initial;
 }
 
 form {
