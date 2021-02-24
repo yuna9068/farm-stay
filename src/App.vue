@@ -19,9 +19,10 @@ export default {
   mounted() {
     // 若在 created() 執行 getFarm()，有機會無法關閉 Loading
     this.getFarm();
+    this.setFavoritesData();
   },
   methods: {
-    ...mapActions(['saveFarm']),
+    ...mapActions(['saveFarm', 'updateFavorites']),
     /**
      * 取得所有農場資料
      */
@@ -47,7 +48,7 @@ export default {
       }
     },
     /**
-     * 檢查 localStorage 是否有資料
+     * 檢查 localStorage 是否有農場資料
      */
     checkData() {
       const setMs = localStorage.getItem('setMs');
@@ -60,10 +61,11 @@ export default {
       }
       localStorage.removeItem('setMs');
       localStorage.removeItem('farmList');
+      localStorage.removeItem('favorites');
       return false;
     },
     /**
-     * 檢查每筆資料是否有 Image，沒有塞一張預設照片
+     * 檢查農場每筆資料是否有 Image，沒有塞一張預設照片
      *
      * @param {Array} farmList - 農場完整資料
      */
@@ -76,14 +78,14 @@ export default {
         }
       });
       this.saveFarm(farmList);
-      this.setData(farmList);
+      this.setFarmData(farmList);
     },
     /**
-     * 將資料存到 localStorage
+     * 將農場資料存到 localStorage
      *
      * @param {Array} data - 農場完整資料
      */
-    setData(data) {
+    setFarmData(data) {
       const farmList = JSON.stringify(data);
       localStorage.setItem('setMs', new Date().getTime());
       localStorage.setItem('farmList', farmList);
@@ -94,7 +96,9 @@ export default {
      */
     getData() {
       const farmObject = JSON.parse(localStorage.getItem('farmList'));
+      const favoritesObject = JSON.parse(localStorage.getItem('favorites'));
       this.saveFarm(farmObject);
+      this.updateFavorites(favoritesObject);
       this.$loading.hide();
     },
     /**
@@ -107,9 +111,18 @@ export default {
       const imgSrc = require(`@/assets/images/${this.getPhotoData[randomIndex].photoName}`);
       return imgSrc;
     },
+    /**
+     * 重新載入或離開網頁時將收藏景點的資料存到 localStorage
+     */
+    setFavoritesData() {
+      const vm = this;
+      window.onbeforeunload = () => {
+        localStorage.setItem('favorites', JSON.stringify(vm.getFavoritesList));
+      };
+    },
   },
   computed: {
-    ...mapGetters(['getPhotoData']),
+    ...mapGetters(['getPhotoData', 'getFavoritesList']),
   },
 };
 </script>

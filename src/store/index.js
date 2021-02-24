@@ -117,11 +117,23 @@ export default new Vuex.Store({
       state.selectedFarm = payload;
     },
     FAVORITESLIST(state, { type, target }) {
-      if (type === 'add') {
-        state.favoritesList.push(target);
-      } else {
-        const removeIndex = state.favoritesList.findIndex((item) => item.ID === target.ID);
-        state.favoritesList.splice(removeIndex, 1);
+      switch (type) {
+        case 'add':
+          state.favoritesList.push(target);
+          break;
+
+        case 'remove': {
+          const removeIndex = state.favoritesList.findIndex((item) => item.ID === target.ID);
+          state.favoritesList.splice(removeIndex, 1);
+          break;
+        }
+
+        case 'update':
+          state.favoritesList = target;
+          break;
+
+        default:
+          break;
       }
     },
   },
@@ -167,6 +179,15 @@ export default new Vuex.Store({
     removeFavorites(context, payload) {
       context.commit('FAVORITESLIST', {
         type: 'remove',
+        target: payload,
+      });
+    },
+    /**
+     * 更新收藏景點清單
+     */
+    updateFavorites(context, payload) {
+      context.commit('FAVORITESLIST', {
+        type: 'update',
         target: payload,
       });
     },
