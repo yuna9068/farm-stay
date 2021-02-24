@@ -1,0 +1,32 @@
+.defaultImg {
+  position: relative;
+  &::after {
+    content: '場地未提供照片，此為示意圖';
+    position: absolute;
+    z-index: 2;
+    top: 30%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: fit-content;
+    padding: 0.25rem 0.5rem;
+    text-align: center;
+    letter-spacing: 0.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(0, 0, 0, 0.3);
+  }
+}
+
+img {
+  z-index: 1;
+}
+
+.imgBlur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: center / cover no-repeat;
+  filter: blur(10px);
+}

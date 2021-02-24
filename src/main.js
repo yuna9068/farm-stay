@@ -7,8 +7,10 @@ import 'bootstrap';
 
 import './plugins/fontAwesome';
 import pluginLoading from './plugins/loading';
+import pluginCommonMethods from './plugins/commonMethods';
 
 Vue.use(pluginLoading);
+Vue.use(pluginCommonMethods);
 
 Vue.config.productionTip = false;
 

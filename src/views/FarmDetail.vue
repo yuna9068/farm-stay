@@ -12,18 +12,14 @@
         </div>
 
         <div class="col-12 col-md-7 col-lg-8">
-          <img
-            v-if="farm.Image"
-            class="img-fluid w-100 mb-3 roundedCustomer"
-            :src="farm.Image"
-            :alt="farm.Name"
-          >
-          <img
-            v-else
-            class="img-fluid w-100 mb-3 roundedCustomer"
-            src="@/assets/images/chasing-lin-forest_during_day_photo-unsplash.jpg"
-            :alt="farm.Name"
-          >
+          <div :class="$isDefaultImg(farm.Image)">
+            <img
+              v-if="farm.Image"
+              class="img-fluid w-100 mb-3 roundedCustomer"
+              :src="farm.Image"
+              :alt="farm.Name"
+            >
+          </div>
           <div
             v-if="farm.Content"
             class="mb-3 p-3 bg-light text-secondary farmContent roundedCustomer"

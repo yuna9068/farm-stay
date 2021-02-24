@@ -51,7 +51,7 @@ $delay-time: 0.2;
 .modal-backdrop {
   z-index: -1;
   &.show {
-    z-index: initial;
+    z-index: $zindex-modal-backdrop;
   }
 }
 

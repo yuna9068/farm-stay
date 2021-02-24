@@ -1,38 +1,43 @@
 <template>
-  <div class="container-md px-0">
+  <div class="container-md px-0 py-sm-3">
     <ul class="list-unstyled">
       <li
-        v-for="(item, i) in getFavoritesList"
+        v-for="(farm, i) in getFavoritesList"
         :key="i"
-        class="media w-100 py-3 px-2 p-sm-4 align-items-stretch"
+        class="media w-100 py-3 px-2 p-sm-4 align-items-stretch position-relative"
         :class="{'bg-light': i % 2 === 0}"
       >
-        <div class="col-6 col-sm-4 p-0 mr-2 mr-sm-3">
-          <img :src="item.Image" :alt="item.Name" class="w-100 rounded-lg">
+        <div
+          class="
+            col-6 col-sm-4 p-0 mr-2 mr-sm-3 h-100 overflow-hidden rounded-lg
+            d-flex flex-column justify-content-center
+          "
+          :class="$isDefaultImg(farm.Image)"
+        >
+          <img :src="farm.Image" :alt="farm.Name" loading="lazy" class="w-100">
+          <div class="imgBlur" :style="{'background-image': `url('${farm.Image}')`}"/>
         </div>
 
         <div
           class="media-body col-6 col-sm-8 py-1 px-0 d-flex flex-column"
         >
-          <h6 class="text-truncate mb-1">{{ item.Name }}</h6>
+          <h6 class="text-truncate mb-3">{{ farm.Name }}</h6>
 
-          <div
-            class="overflow-auto flex-grow-0 text-secondary farmContent"
-          >
-            {{ item.Content }}
+          <div class="overflow-auto flex-grow-0 text-secondary farmContent h-50">
+            {{ farm.Content }}
           </div>
 
           <div class="text-right mt-auto pt-2 mediaButtons">
             <button
               class="d-inline-block p-1 btn btn-danger shadow-none mb-1 btnMedia btnRemove"
-              @click.prevent="removeItem(item)"
+              @click.prevent="removeItem(farm)"
             >
               <i class="fas fa-trash-alt"></i>
               刪除
             </button>
             <button
               class="d-inline-block p-1 btn btn-outline-primary shadow-none ml-2 mb-1 btnMedia"
-              @click.prevent="showDetail(item)"
+              @click.prevent="showDetail(farm)"
             >
               <i class="fas fa-info-circle"></i>
               詳細資訊
@@ -84,17 +89,17 @@ export default {
 <style lang="scss" scoped>
 $showContentWidth: 510px;
 
+.media {
+  height: 30vh;
+  @media (min-width: $showContentWidth) {
+    height: 35vh;
+  }
+}
+
 .farmContent {
   display: none;
-  height: 70px;
   @media (min-width: $showContentWidth) {
     display: block;
-  }
-  @include media-breakpoint-up(lg) {
-    height: 100px;
-  }
-  @include media-breakpoint-up(xl) {
-    height: 150px;
   }
 }
 

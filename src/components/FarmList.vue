@@ -15,10 +15,11 @@
       >
         <div
           class="card bg-transparent border-0 justify-content-center overflow-hidden"
+          :class="$isDefaultImg(farm.Image)"
           @click="showDetail(farm)"
         >
-          <img class="card-img" loading="lazy" :src="farm.Image" :alt="farm.Name">
-          <div class="cardImgBlur" :style="{'background-image': `url(${farm.Image})`}"/>
+          <img class="card-img rounded-0" loading="lazy" :src="farm.Image" :alt="farm.Name">
+          <div class="imgBlur" :style="{'background-image': `url('${farm.Image}')`}"/>
           <div class="card-img-overlay d-flex">
             <h5 class="card-title mb-0 mr-auto">{{ farm.Name }}</h5>
             <div class="farmRegion ml-2 text-right">
@@ -99,16 +100,6 @@ export default {
   height: 245px;
   cursor: pointer;
   box-shadow: $box-shadow-sm;
-  &ImgBlur {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background: center / cover no-repeat;
-    filter: blur(10px);
-  }
   &:hover {
     box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.4);
   }
@@ -117,6 +108,7 @@ export default {
 .card-img-overlay {
   background: rgba(255, 255, 255, 0.8);
   top: initial;
+  z-index: 5;
   border-top-right-radius: 0;
   border-top-left-radius: 0;
   border-top: 6px solid $primary;
@@ -126,7 +118,7 @@ export default {
   top: 1.25rem;
   right: 1.25rem;
   font-size: 1.8rem;
-  z-index: 2;
+  z-index: 3;
   width: 2.5rem;
   height: 2.5rem;
   background: #ffffff;
@@ -144,9 +136,6 @@ export default {
     border-right: none;
     border-left: none;
     height: 40vh;
-    .card-img {
-      border-radius: 0;
-    }
   }
 }
 </style>
