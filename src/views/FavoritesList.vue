@@ -45,10 +45,10 @@
             <button
               class="d-inline-block p-1 btn btn-primary shadow-none ml-2 mb-1 btnMedia"
               @click.prevent="addDirectionsItem(farm)"
-              :disabled="btnDirectionsStatus() || inDirectionsList(farm)"
+              :disabled="btnDirectionsStatus() || inDirectionsList(farm.ID)"
             >
               <i class="fas fa-plus-circle"></i>
-              {{ inDirectionsList(farm) ? '已加入！' : '加入路線'}}
+              {{ inDirectionsList(farm.ID) ? '已加入！' : '加入路線'}}
             </button>
           </div>
         </div>
@@ -108,10 +108,11 @@ export default {
     /**
      * 是否已加入規劃路線清單
      *
-     * @param {number} farm - 農場資料
+     * @param {number} farmId - 農場 Id
      */
-    inDirectionsList(farm) {
-      if (this.getDirectionsList.includes(farm)) {
+    inDirectionsList(farmId) {
+      const directionsIndex = this.getDirectionsList.findIndex((item) => item.ID === farmId);
+      if (directionsIndex > -1) {
         return true;
       }
       return false;
