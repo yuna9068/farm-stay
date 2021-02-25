@@ -1,17 +1,20 @@
 <template>
   <div class="FarmDetail">
     <div class="container-md">
+      <!-- 麵包屑 -->
       <ol class="breadcrumb bg-transparent pl-0 mb-0">
         <li class="breadcrumb-item">{{ farm.CountyName }}</li>
         <li class="breadcrumb-item">{{ farm.TownshipName }}</li>
       </ol>
 
       <div class="row">
+        <!-- 景點名稱 -->
         <div class="col-12">
           <h1 class="h2 farmName">{{ farm.Name }}</h1>
         </div>
 
         <div class="col-12 col-md-7 col-lg-8">
+          <!-- 景點照片 -->
           <div :class="$isDefaultImg(farm.Image)">
             <img
               v-if="farm.Image"
@@ -20,6 +23,7 @@
               :alt="farm.Name"
             >
           </div>
+          <!-- 景點介紹 -->
           <div
             v-if="farm.Content"
             class="mb-3 p-3 bg-light text-secondary farmContent roundedCustomer"
@@ -27,6 +31,7 @@
         </div>
 
         <div class="col-12 col-md-5 col-lg-4">
+          <!-- 景點資訊 -->
           <ul class="p-3 text-break roundedCustomer farmInfo">
             <li v-if="farm.AddrDisplay">
               <i class="fas fa-map-marker-alt"></i>
@@ -90,13 +95,29 @@
               </ul>
             </li>
           </ul>
+          <!-- 移出 / 加入收藏景點 -->
+          <div>
+            <button
+              v-if="inFavoritesList"
+              type="button"
+              class="btn btn-outline-danger w-100 shadow-none roundedCustomer"
+              @click="removeFavoritesItem()"
+            >移出收藏景點</button>
+            <button
+              v-else
+              type="button"
+              class="btn btn-outline-primary w-100 shadow-none roundedCustomer"
+              @click="addFavoritesItem()"
+            >加入收藏景點</button>
+          </div>
         </div>
       </div>
 
       <div class="row">
         <div class="col-12">
+          <!-- Google 地圖 -->
           <iframe
-            :src="mapEmbed(farm.Name)"
+            :src="mapEmbed(farm.AddrDisplay)"
             width="600"
             height="450"
             class="border-0 w-100 roundedCustomer"
@@ -110,7 +131,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FarmDetail',
@@ -120,6 +141,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions(['removeFavorites', 'addFavorites']),
     /**
      * 連至 Google Maps 的網址
      */
@@ -156,6 +178,18 @@ export default {
       }
     },
     /**
+     * 從收藏景點清單中移除
+     */
+    removeFavoritesItem() {
+      this.removeFavorites(this.farm);
+    },
+    /**
+     * 加入收藏景點清單
+     */
+    addFavoritesItem() {
+      this.addFavorites(this.farm);
+    },
+    /**
      * 嵌入 Google Maps 的網址
      */
     mapEmbed(address) {
@@ -166,12 +200,33 @@ export default {
   computed: {
     ...mapGetters({
       farm: 'getSelectedFarm',
+      favorites: 'getFavoritesList',
     }),
+    /**
+     * 若有多組電話則拆成陣列
+     */
     telArray() {
       return this.farm.TelDisplay.split('、');
     },
+    /**
+     * 若有多組 Email 則拆成陣列
+     */
     mailArray() {
       return this.farm.Email.split('、');
+    },
+    /**
+     * 是否已加入收藏清單
+     */
+    inFavoritesList() {
+      if (!this.favorites.length) {
+        return false;
+      }
+      const itemIndex = this.favorites.findIndex((item) => item.ID === this.farm.ID);
+
+      if (itemIndex > -1) {
+        return true;
+      }
+      return false;
     },
   },
 };
