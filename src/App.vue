@@ -108,10 +108,11 @@ export default {
      * 隨機取出一張預設照片
      */
     randomImage() {
-      const photoLength = this.getPhotoData.length;
+      const farmImages = this.getPhotoData.filter((img) => img.tag === 'farm');
+      const photoLength = farmImages.length;
       const randomIndex = Math.floor(Math.random() * Math.floor(photoLength));
       // eslint-disable-next-line
-      const imgSrc = require(`@/assets/images/${this.getPhotoData[randomIndex].photoName}`);
+      const imgSrc = require(`@/assets/images/${farmImages[randomIndex].photoName}`);
       return imgSrc;
     },
     /**

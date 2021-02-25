@@ -2,6 +2,16 @@
   <div class="container-md px-0 py-sm-3">
     <ul class="list-unstyled">
       <li
+        v-if="getFavoritesList.length === 0"
+        class="py-5 text-center text-primary"
+      >
+        <p>還沒有收藏任何景點唷～</p>
+        <img
+          src="@/assets/images/magnifying-glass-1019870_1280.jpg"
+          class="img-fluid imgToFind"
+          alt="還沒有收藏任何景點唷～">
+      </li>
+      <li
         v-for="(farm, i) in getFavoritesList"
         :key="i"
         class="media w-100 py-3 px-2 p-sm-4 align-items-stretch position-relative"
@@ -126,6 +136,16 @@ export default {
 
 <style lang="scss" scoped>
 $showContentWidth: 510px;
+
+.imgToFind {
+  width: 50%;
+  @include media-breakpoint-up(sm) {
+    width: 40%;
+  }
+  @include media-breakpoint-up(lg) {
+    width: 30%;
+  }
+}
 
 .media {
   height: 30vh;
