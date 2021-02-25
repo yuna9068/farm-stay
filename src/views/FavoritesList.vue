@@ -85,9 +85,6 @@ export default {
      */
     removeFavoritesItem(farm) {
       this.removeFavorites(farm);
-      if (this.getDirectionsList.includes(farm)) {
-        this.removeDirections(farm);
-      }
     },
     /**
      * 加入規劃路線清單

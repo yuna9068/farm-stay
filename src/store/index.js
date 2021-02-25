@@ -201,13 +201,21 @@ export default new Vuex.Store({
       });
     },
     /**
-     * 從收藏景點清單中移除
+     * 從收藏景點清單中移除，若已加入規劃路線清單也要一併刪除
      */
     removeFavorites(context, payload) {
       context.commit('FAVORITESLIST', {
         type: 'remove',
         target: payload,
       });
+
+      const removeIndex = context.state.directionsList.findIndex((item) => item.ID === payload.ID);
+      if (removeIndex > -1) {
+        context.commit('DIRECTIONSLIST', {
+          type: 'remove',
+          target: payload,
+        });
+      }
     },
     /**
      * 更新收藏景點清單
