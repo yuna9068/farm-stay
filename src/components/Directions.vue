@@ -98,6 +98,7 @@ export default {
      * @param {number} index - 拖曳物件的 index
      */
     dragstart(e, index) {
+      e.dataTransfer.effectAllowed = 'move';
       e.dataTransfer.setData('text', index);
     },
     /**
@@ -107,6 +108,7 @@ export default {
      * @param {number} dropIndex - 放下拖曳物件的 index
      */
     drop(e, dropIndex) {
+      e.dataTransfer.dropEffect = 'move';
       const newList = this.getDirectionsList.concat([]);
       const dragIndex = e.dataTransfer.getData('text');
       const dragItem = newList[dragIndex];
@@ -192,6 +194,7 @@ svg {
   pointer-events: auto;
   .farmInfo {
     width: 60%;
+    cursor: move;
     @include media-breakpoint-up(sm) {
       width: 80%;
     }
