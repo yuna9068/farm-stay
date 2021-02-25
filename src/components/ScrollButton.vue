@@ -54,6 +54,7 @@ $transition-time: 0.4s;
 .scrollButton {
   right: -100px;
   bottom: 20px;
+  z-index: 10;
   opacity: 0;
   transition: all $transition-time linear;
   .btn {
