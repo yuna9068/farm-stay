@@ -33,7 +33,11 @@
       </ul>
     </div>
 
-    <form class="form-inline d-sm-none position-absolute" @submit.prevent>
+    <form
+      class="form-inline d-sm-none position-absolute"
+      :class="{'hideIcon': hideSearchIcon}"
+      @submit.prevent
+    >
       <div class="input-group justify-content-end">
         <input
           type="text"
@@ -114,6 +118,17 @@ export default {
       }
     },
   },
+  computed: {
+    /**
+     * 是否隱藏搜尋 icon
+     */
+    hideSearchIcon() {
+      if (this.$route.name === 'Home') {
+        return false;
+      }
+      return true;
+    },
+  },
 };
 </script>
 
@@ -132,6 +147,9 @@ h1 {
 form {
   top: 0.5rem;
   right: 1rem;
+  &.hideIcon {
+    display: none;
+  }
 }
 
 .input-group {
