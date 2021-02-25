@@ -22,7 +22,7 @@ export default {
     this.setFavoritesData();
   },
   methods: {
-    ...mapActions(['saveFarm', 'updateFavorites']),
+    ...mapActions(['saveFarm', 'updateFavorites', 'updateDirections']),
     /**
      * 取得所有農場資料
      */
@@ -62,6 +62,7 @@ export default {
       localStorage.removeItem('setMs');
       localStorage.removeItem('farmList');
       localStorage.removeItem('favorites');
+      localStorage.removeItem('directions');
       return false;
     },
     /**
@@ -97,8 +98,10 @@ export default {
     getData() {
       const farmObject = JSON.parse(localStorage.getItem('farmList'));
       const favoritesObject = JSON.parse(localStorage.getItem('favorites'));
+      const directionsObject = JSON.parse(localStorage.getItem('directions'));
       this.saveFarm(farmObject);
       this.updateFavorites(favoritesObject);
+      this.updateDirections(directionsObject);
       this.$loading.hide();
     },
     /**
@@ -112,17 +115,18 @@ export default {
       return imgSrc;
     },
     /**
-     * 重新載入或離開網頁時將收藏景點的資料存到 localStorage
+     * 重新載入或離開網頁時將收藏景點、規劃路線的資料存到 localStorage
      */
     setFavoritesData() {
       const vm = this;
       window.onbeforeunload = () => {
         localStorage.setItem('favorites', JSON.stringify(vm.getFavoritesList));
+        localStorage.setItem('directions', JSON.stringify(vm.getDirectionsList));
       };
     },
   },
   computed: {
-    ...mapGetters(['getPhotoData', 'getFavoritesList']),
+    ...mapGetters(['getPhotoData', 'getFavoritesList', 'getDirectionsList']),
   },
 };
 </script>

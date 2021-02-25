@@ -30,7 +30,7 @@
           <div class="text-right mt-auto pt-2 mediaButtons">
             <button
               class="d-inline-block p-1 btn btn-danger shadow-none mb-1 btnMedia btnRemove"
-              @click.prevent="removeItem(farm)"
+              @click.prevent="removeFavoritesItem(farm)"
             >
               <i class="fas fa-trash-alt"></i>
               刪除
@@ -44,24 +44,31 @@
             </button>
             <button
               class="d-inline-block p-1 btn btn-primary shadow-none ml-2 mb-1 btnMedia"
+              @click.prevent="addDirectionsItem(farm)"
+              :disabled="btnDirectionsStatus() || inDirectionsList(farm)"
             >
-              <i class="fas fa-directions"></i>
-              規劃路徑
+              <i class="fas fa-plus-circle"></i>
+              {{ inDirectionsList(farm) ? '已加入！' : '加入路線'}}
             </button>
           </div>
         </div>
       </li>
     </ul>
+    <Directions/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
+import Directions from '@/components/Directions.vue';
 
 export default {
   name: 'FavoritesList',
+  components: {
+    Directions,
+  },
   methods: {
-    ...mapActions(['updateSelectedFarm', 'removeFavorites']),
+    ...mapActions(['updateSelectedFarm', 'removeFavorites', 'addDirections', 'removeDirections']),
     /**
      * 進入農場詳細資訊頁
      *
@@ -72,16 +79,49 @@ export default {
       this.$router.push('/farm');
     },
     /**
-     * 從收藏景點清單中移除
+     * 從收藏景點清單中移除，若已加入規劃路線清單也要一併刪除
      *
      * @param {Object} farm - 農場資料
      */
-    removeItem(farm) {
+    removeFavoritesItem(farm) {
       this.removeFavorites(farm);
+      if (this.getDirectionsList.includes(farm)) {
+        this.removeDirections(farm);
+      }
+    },
+    /**
+     * 加入規劃路線清單
+     *
+     * @param {Object} farm - 農場資料
+     */
+    addDirectionsItem(farm) {
+      if (!this.btnDirectionsStatus()) {
+        this.addDirections(farm);
+      }
+    },
+    /**
+     * 加入規劃路線按鈕 disabled 狀態
+     */
+    btnDirectionsStatus() {
+      if (this.getDirectionsList.length >= 5) {
+        return true;
+      }
+      return false;
+    },
+    /**
+     * 是否已加入規劃路線清單
+     *
+     * @param {number} farm - 農場資料
+     */
+    inDirectionsList(farm) {
+      if (this.getDirectionsList.includes(farm)) {
+        return true;
+      }
+      return false;
     },
   },
   computed: {
-    ...mapGetters(['getFavoritesList']),
+    ...mapGetters(['getFavoritesList', 'getDirectionsList']),
   },
 };
 </script>

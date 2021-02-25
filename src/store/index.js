@@ -16,6 +16,7 @@ export default new Vuex.Store({
     filterFarm: [], // 首頁顯示的農場清單
     selectedFarm: {}, // 使用者點選的農場詳細資料
     favoritesList: [], // 收藏景點清單
+    directionsList: [], // 規劃路線清單
     photoData: photo, // 預設圖片資料
   },
   getters: {
@@ -48,6 +49,12 @@ export default new Vuex.Store({
      */
     getFavoritesList(state) {
       return state.favoritesList;
+    },
+    /**
+     * 取得規劃路線清單
+     */
+    getDirectionsList(state) {
+      return state.directionsList;
     },
     /**
      * 取得預設圖片資料
@@ -129,7 +136,27 @@ export default new Vuex.Store({
         }
 
         case 'update':
-          state.favoritesList = target;
+          state.favoritesList = target || [];
+          break;
+
+        default:
+          break;
+      }
+    },
+    DIRECTIONSLIST(state, { type, target }) {
+      switch (type) {
+        case 'add':
+          state.directionsList.push(target);
+          break;
+
+        case 'remove': {
+          const removeIndex = state.directionsList.findIndex((item) => item.ID === target.ID);
+          state.directionsList.splice(removeIndex, 1);
+          break;
+        }
+
+        case 'update':
+          state.directionsList = target || [];
           break;
 
         default:
@@ -187,6 +214,33 @@ export default new Vuex.Store({
      */
     updateFavorites(context, payload) {
       context.commit('FAVORITESLIST', {
+        type: 'update',
+        target: payload,
+      });
+    },
+    /**
+     * 加入規劃路線清單
+     */
+    addDirections(context, payload) {
+      context.commit('DIRECTIONSLIST', {
+        type: 'add',
+        target: payload,
+      });
+    },
+    /**
+     * 從規劃路線清單中移除
+     */
+    removeDirections(context, payload) {
+      context.commit('DIRECTIONSLIST', {
+        type: 'remove',
+        target: payload,
+      });
+    },
+    /**
+     * 更新規劃路線清單
+     */
+    updateDirections(context, payload) {
+      context.commit('DIRECTIONSLIST', {
         type: 'update',
         target: payload,
       });

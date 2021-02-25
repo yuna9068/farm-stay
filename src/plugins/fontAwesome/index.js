@@ -11,6 +11,8 @@ import {
   faInfoCircle,
   faDirections,
   faTrashAlt,
+  faPlusCircle,
+  faCarSide,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -29,6 +31,8 @@ library.add(
   faDirections,
   faTrashAlt,
   farHeart,
+  faPlusCircle,
+  faCarSide,
 );
 dom.watch();
 
