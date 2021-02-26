@@ -28,7 +28,7 @@
           <router-link to="/favorites" class="nav-link">收藏景點</router-link>
         </li>
         <li class="nav-item" @click="collapsedMenu()">
-          <router-link to="/" class="nav-link">特別感謝</router-link>
+          <router-link to="/thanks" class="nav-link">特別感謝</router-link>
         </li>
       </ul>
     </div>

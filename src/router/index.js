@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import Home from '@/views/Home.vue';
 import FarmDetail from '@/views/FarmDetail.vue';
 import FavoritesList from '@/views/FavoritesList.vue';
+import Thanks from '@/views/Thanks.vue';
 
 Vue.use(VueRouter);
 
@@ -31,6 +32,14 @@ const routes = [
     path: '/favorites',
     name: 'Favorites',
     component: FavoritesList,
+    meta: {
+      keepAlive: true,
+    },
+  },
+  {
+    path: '/thanks',
+    name: 'Thanks',
+    component: Thanks,
     meta: {
       keepAlive: true,
     },

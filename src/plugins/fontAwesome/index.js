@@ -13,6 +13,7 @@ import {
   faTrashAlt,
   faPlusCircle,
   faCarSide,
+  faHandsHelping,
 } from '@fortawesome/free-solid-svg-icons';
 import { faHeart as farHeart } from '@fortawesome/free-regular-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -33,6 +34,7 @@ library.add(
   farHeart,
   faPlusCircle,
   faCarSide,
+  faHandsHelping,
 );
 dom.watch();
 
