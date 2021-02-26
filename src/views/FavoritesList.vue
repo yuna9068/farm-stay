@@ -18,13 +18,10 @@
         :class="{'bg-light': i % 2 === 0}"
       >
         <div
-          class="
-            col-6 col-sm-4 p-0 mr-2 mr-sm-3 h-100 overflow-hidden rounded-lg
-            d-flex flex-column justify-content-center
-          "
+          class="col-6 col-sm-4 p-0 mr-2 mr-sm-3 overflow-hidden rounded-lg imgAutoResizeFrame"
           :class="$isDefaultImg(farm.Image)"
         >
-          <img :src="farm.Image" :alt="farm.Name" loading="lazy" class="w-100">
+          <img :src="farm.Image" :alt="farm.Name" loading="lazy" class="imgAutoResize">
           <div class="imgBlur" :style="{'background-image': `url('${farm.Image}')`}"/>
         </div>
 
@@ -33,8 +30,8 @@
         >
           <h6 class="text-truncate mb-3">{{ farm.Name }}</h6>
 
-          <div class="overflow-auto flex-grow-0 text-secondary farmContent h-50">
-            {{ farm.Content }}
+          <div class="overflow-auto flex-grow-0 text-secondary text-justify h-50 farmContent">
+            {{ farm.Content ? farm.Content : '景點未提供簡介內容'}}
           </div>
 
           <div class="text-right mt-auto pt-2 mediaButtons">
@@ -156,6 +153,7 @@ $showContentWidth: 510px;
 
 .farmContent {
   display: none;
+  letter-spacing: 0.2rem;
   @media (min-width: $showContentWidth) {
     display: block;
   }
@@ -169,8 +167,7 @@ $showContentWidth: 510px;
   .btnMedia {
     font-size: 14px;
     svg {
-      height: 1.5em;
-      vertical-align: bottom;
+      vertical-align: -0.125rem;
     }
   }
   .btnRemove {

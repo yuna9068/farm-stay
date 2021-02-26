@@ -14,11 +14,16 @@
         class="col-11 col-md-6 mb-2 mb-sm-4"
       >
         <div
-          class="card bg-transparent border-0 justify-content-center overflow-hidden"
+          class="card border-0 overflow-hidden bg-transparent imgAutoResizeFrame"
           :class="$isDefaultImg(farm.Image)"
           @click="showDetail(farm)"
         >
-          <img class="card-img rounded-0" loading="lazy" :src="farm.Image" :alt="farm.Name">
+          <img
+            class="card-img rounded-0 imgAutoResize"
+            loading="lazy"
+            :src="farm.Image"
+            :alt="farm.Name"
+          >
           <div class="imgBlur" :style="{'background-image': `url('${farm.Image}')`}"/>
           <div class="card-img-overlay d-flex">
             <h5 class="card-title mb-0 mr-auto">{{ farm.Name }}</h5>
@@ -100,8 +105,10 @@ export default {
   height: 245px;
   cursor: pointer;
   box-shadow: $box-shadow-sm;
+  transition: all 0.1s ease-out;
   &:hover {
     box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease-in;
   }
 }
 

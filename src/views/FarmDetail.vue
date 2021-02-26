@@ -15,24 +15,27 @@
 
         <div class="col-12 col-md-7 col-lg-8">
           <!-- 景點照片 -->
-          <div :class="$isDefaultImg(farm.Image)">
-            <img
-              v-if="farm.Image"
-              class="img-fluid w-100 mb-3 roundedCustomer"
-              :src="farm.Image"
-              :alt="farm.Name"
-            >
+          <div
+            class="mb-3 overflow-hidden roundedCustomer imgAutoResizeFrame"
+            :class="$isDefaultImg(farm.Image)"
+          >
+            <img v-if="farm.Image" :src="farm.Image" :alt="farm.Name" class="imgAutoResize">
+            <div class="imgBlur" :style="{'background-image': `url('${farm.Image}')`}"/>
           </div>
-          <!-- 景點介紹 -->
+          <!-- 景點簡介 -->
+          <h2 v-if="farm.Content" class="h5">景點簡介</h2>
+          <hr v-if="farm.Content">
           <div
             v-if="farm.Content"
-            class="mb-3 p-3 bg-light text-secondary farmContent roundedCustomer"
+            class="mb-3 text-secondary text-justify farmContent roundedCustomer"
           >{{ farm.Content }}</div>
         </div>
 
         <div class="col-12 col-md-5 col-lg-4">
           <!-- 景點資訊 -->
-          <ul class="p-3 text-break roundedCustomer farmInfo">
+          <h2 v-if="!noFarmInfo" class="h5">景點資訊</h2>
+          <hr v-if="!noFarmInfo">
+          <ul v-if="!noFarmInfo" class="p-3 text-break roundedCustomer farmInfo">
             <li v-if="farm.AddrDisplay">
               <i class="fas fa-map-marker-alt"></i>
               <a :href="mapUrl(farm.AddrDisplay)" target="_blank">
@@ -81,7 +84,7 @@
               <i class="fas fa-clock"></i>
               <span>開放時間</span>
             </li>
-            <li>
+            <li v-if="farm.OpenTimeList && farm.OpenTimeList.length > 0">
               <ul class="pl-4 pr-3">
                 <li
                   v-for="(item, i) in farm.OpenTimeList"
@@ -96,11 +99,11 @@
             </li>
           </ul>
           <!-- 移出 / 加入收藏景點 -->
-          <div>
+          <div class="mb-3">
             <button
               v-if="inFavoritesList"
               type="button"
-              class="btn btn-outline-danger w-100 shadow-none roundedCustomer"
+              class="btn w-100 shadow-none roundedCustomer btnRemove"
               @click="removeFavoritesItem()"
             >移出收藏景點</button>
             <button
@@ -113,9 +116,11 @@
         </div>
       </div>
 
-      <div class="row">
+      <div v-if="farm.AddrDisplay" class="row">
         <div class="col-12">
           <!-- Google 地圖 -->
+          <h2 class="h5">Google 地圖</h2>
+          <hr>
           <iframe
             :src="mapEmbed(farm.AddrDisplay)"
             width="600"
@@ -123,7 +128,7 @@
             class="border-0 w-100 roundedCustomer"
             allowfullscreen
             loading="lazy"
-            ></iframe>
+          />
         </div>
       </div>
     </div>
@@ -228,12 +233,29 @@ export default {
       }
       return false;
     },
+    /**
+     * 判斷是否沒有景點資訊
+     */
+    noFarmInfo() {
+      if (
+        this.farm.AddrDisplay
+        || this.farm.TelDisplay
+        || this.farm.Email
+        || this.farm.FBUrl
+        || this.farm.UrlDisplay
+        || this.farm.OpenTimeList.length
+      ) {
+        return false;
+      }
+      return true;
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 $darkenPrimary: darken($primary, 25%);
+$btnRemoveColor: #f16c5d;
 
 .breadcrumb-item, .farmName {
   color: $darkenPrimary;
@@ -243,9 +265,22 @@ $darkenPrimary: darken($primary, 25%);
   border-radius: 0.5rem;
 }
 
+.imgAutoResizeFrame {
+  height: 200px;
+  @include media-breakpoint-up(md) {
+    height: 300px;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 360px;
+  }
+  @include media-breakpoint-up(lg) {
+    height: 400px;
+  }
+}
+
 .farmInfo {
   list-style: none;
-  background: $darkenPrimary;
+  background: #3e7ec3;
   li {
     display: flex;
     color: #ffffff;
@@ -254,7 +289,9 @@ $darkenPrimary: darken($primary, 25%);
     }
     a {
       color: #ffffff;
-      margin-bottom: 0.5rem;
+      &:not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
       &:hover {
         text-decoration: none;
       }
@@ -271,5 +308,14 @@ $darkenPrimary: darken($primary, 25%);
 
 .farmContent {
   letter-spacing: 0.2rem;
+}
+
+.btnRemove {
+  color: $btnRemoveColor;
+  border-color: $btnRemoveColor;
+  &:hover {
+    color: #ffffff;
+    background: $btnRemoveColor;
+  }
 }
 </style>
