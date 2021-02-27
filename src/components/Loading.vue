@@ -5,6 +5,7 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content bg-transparent border-0">
           <div class="modal-body text-center">
+            <p class="text-white">因資料總數達兩千多筆，下載資料可能需要一點時間，請耐心等候</p>
             <div
               class="spinner-grow mx-2 mx-sm-3 text-primary"
               role="status"
