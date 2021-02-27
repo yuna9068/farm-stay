@@ -146,8 +146,11 @@ $showContentWidth: 510px;
 
 .media {
   height: 30vh;
+  min-height: 170px;
+  max-height: 200px;
   @media (min-width: $showContentWidth) {
     height: 35vh;
+    max-height: 350px;
   }
 }
 

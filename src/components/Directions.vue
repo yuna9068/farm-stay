@@ -13,7 +13,7 @@
         {{ getDirectionsList.length }} / 5
       </span>
     </button>
-    <ul class="list-group list-group-flush shadow-lg">
+    <ul class="list-group list-group-flush" :class="{'shadow-lg': listDisplay && checkListLength}">
       <li
         v-for="(farm, i) in getDirectionsList"
         :key="`directions${farm.ID}`"

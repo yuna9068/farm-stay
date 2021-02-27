@@ -143,6 +143,7 @@ export default {
     border-right: none;
     border-left: none;
     height: 40vh;
+    min-height: 227px;
   }
 }
 </style>

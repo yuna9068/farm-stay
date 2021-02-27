@@ -73,13 +73,15 @@
           </div>
         </div>
 
-        <button
-          type="button"
-          class="btn form-group col-sm-3 h-100 shadow-none font-weight-bold text-light btnKeyword"
-          @click="search()"
-        >
-          查詢
-        </button>
+        <div class="form-group col-sm-3">
+          <button
+            type="button"
+            class="btn h-100 w-100 shadow-none font-weight-bold text-light btnKeyword"
+            @click="search()"
+          >
+            查詢
+          </button>
+        </div>
       </div>
     </form>
   </div>
@@ -148,12 +150,13 @@ $filterColor: lighten($primary, 30%);
 $filterFontColor: #495057;
 $dropdownItemHoverBg: lighten($primary, 40%);
 $btnKeywordBg: lighten($primary, 10%);
-$textSpacing: 30px;
+$textSpacing: 20px;
 
 .btnKeyword {
   background: $btnKeywordBg;
   letter-spacing: $textSpacing;
   text-indent: $textSpacing;
+  white-space: nowrap;
   &:hover {
     background: $primary;
   }
