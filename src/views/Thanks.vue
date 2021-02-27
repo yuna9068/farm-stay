@@ -24,7 +24,7 @@
         <li>
           <h6>
             <i class="fas fa-hands-helping"></i>
-            icon：Font Awesome
+            Icon：Font Awesome
           </h6>
           <a href="https://fontawesome.com/" target="_blank">Font Awesome 5</a>
         </li>
