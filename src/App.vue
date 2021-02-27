@@ -4,17 +4,20 @@
     <keep-alive>
       <router-view/>
     </keep-alive>
+    <ModalMessage/>
   </div>
 </template>
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import NavbarMain from '@/components/NavbarMain.vue';
+import ModalMessage from '@/components/ModalMessage.vue';
 
 export default {
   name: 'App',
   components: {
     NavbarMain,
+    ModalMessage,
   },
   mounted() {
     // 若在 created() 執行 getFarm()，有機會無法關閉 Loading
@@ -40,8 +43,8 @@ export default {
           url: apiFarm,
         }).done((response) => {
           this.checkImage(response);
-        }).fail((response) => {
-          console.log('fail: ', response);
+        }).fail(() => {
+          $('#modalMessage').modal('show');
         }).always(() => {
           vm.$loading.hide();
         });
