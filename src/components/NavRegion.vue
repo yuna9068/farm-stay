@@ -5,7 +5,8 @@
         href="#"
         class="nav-link rounded-0 text-nowrap"
         :class="{
-          'active': selected === item.countyName
+          'active': selected === item.countyName,
+          'd-none': item.countyName === '全部'
         }"
         @click="selectRegion(item)"
       >{{ item.countyName }}</a>
@@ -20,7 +21,7 @@ export default {
   name: 'NavRegion',
   data() {
     return {
-      selected: '全部',
+      selected: '',
     };
   },
   methods: {
@@ -40,12 +41,20 @@ export default {
   computed: {
     ...mapGetters(['getRegionList']),
   },
+  watch: {
+    getRegionList(newValue) {
+      if (newValue.length > 0) {
+        this.selectRegion(newValue[1]);
+      }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 .nav-pills {
   .nav-link {
+    position: relative;
     color: #607d8b;
     &::after {
       content: '';
@@ -56,7 +65,7 @@ export default {
       height: 0.25rem;
       background: $primary;
       border-radius: 50rem;
-      transition: all 0.8s;
+      transition: all 0.4s;
     }
     &.active {
       position: relative;
