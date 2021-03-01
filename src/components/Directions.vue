@@ -21,10 +21,13 @@
           list-group-item list-group-item-action list-group-item-light
           d-flex justify-content-between align-items-center
         "
+        :class="{'over': overIndex == i}"
         draggable="true"
         @dragstart="dragstart($event, i)"
         @dragover.prevent
         @drop.prevent="drop($event, i)"
+        @dragenter="overIndex = i"
+        @dragend="overIndex = null"
       >
         <div class="mr-3 farmInfo">
           <p class="w-100 text-truncate font-weight-bold">{{ farm.Name }}</p>
@@ -59,6 +62,7 @@ export default {
   data() {
     return {
       listDisplay: false,
+      overIndex: null,
     };
   },
   methods: {
@@ -119,6 +123,7 @@ export default {
       newList.splice(dragIndex, 1, dropItem);
       newList.splice(dropIndex, 1, dragItem);
       this.updateDirections(newList);
+      this.overIndex = null;
     },
   },
   computed: {
@@ -195,6 +200,9 @@ svg {
 .list-group {
   width: calc(100% - 6rem);
   pointer-events: auto;
+  .over {
+    background: lighten($primary, 45%);
+  }
   .farmInfo {
     width: 60%;
     cursor: move;
