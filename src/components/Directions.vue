@@ -78,6 +78,9 @@ export default {
      */
     removeDirectionsItem(farm) {
       this.removeDirections(farm);
+      if (this.getDirectionsList.length === 0) {
+        this.listDisplay = false;
+      }
     },
     /**
      * 連到 Google Maps 規劃路線
