@@ -20,15 +20,18 @@
         :key="`directions${farm.ID}`"
         class="
           list-group-item list-group-item-action list-group-item-light
-          d-flex justify-content-between align-items-center
+          d-flex justify-content-between align-items-center directionsItem
         "
-        :class="{'over': overIndex == i}"
+        :class="{'over': sortInfo.overIndex == i}"
         draggable="true"
         @dragstart="dragstart($event, i)"
         @dragover.prevent
         @drop.prevent="drop($event, i)"
-        @dragenter="overIndex = i"
-        @dragend="overIndex = null"
+        @dragenter="sortInfo.overIndex = i"
+        @dragend="sortInfo.overIndex = null"
+        @touchstart="touchstart(i)"
+        @touchend="touchend($event)"
+        @touchmove="touchmove($event)"
       >
         <div class="mr-3 farmInfo">
           <p class="w-100 text-truncate font-weight-bold">{{ farm.Name }}</p>
@@ -62,9 +65,23 @@ export default {
   name: 'Directions',
   data() {
     return {
-      listDisplay: false,
-      overIndex: null,
+      listDisplay: false, // 是否顯示規劃路線清單條件之一
+      sortInfo: { // 拖曳&觸碰事件相關資訊
+        beforeIndex: null,
+        afterIndex: null,
+        overIndex: null,
+      },
+      listItem: { // 觸碰事件使用，記錄每個規劃路線地點在畫面上顯示的位置
+        xPosition: {
+          start: 0,
+          end: 0,
+        },
+        yPosition: [],
+      },
     };
+  },
+  mounted() {
+    this.updatelistItemYPosition();
   },
   methods: {
     ...mapActions(['removeDirections', 'updateDirections']),
@@ -86,6 +103,21 @@ export default {
       if (this.getDirectionsList.length === 0) {
         this.listDisplay = false;
       }
+      this.updatelistItemYPosition();
+    },
+    /**
+     * 記錄每個規劃路線地點在畫面上顯示的 y 軸位置
+     */
+    updatelistItemYPosition() {
+      this.$nextTick(() => {
+        this.listItem.yPosition = [];
+        $('.directionsItem').each((index, element) => {
+          this.listItem.yPosition.push({
+            start: $(element).offset().top,
+            end: $(element).offset().top + $(element).outerHeight(),
+          });
+        });
+      });
     },
     /**
      * 連到 Google Maps 規劃路線
@@ -105,9 +137,9 @@ export default {
      * @param {Object} e - DOM
      * @param {number} index - 拖曳物件的 index
      */
-    dragstart(e, index) {
+    dragstart(e, dragIndex) {
       e.dataTransfer.effectAllowed = 'move';
-      e.dataTransfer.setData('text', index);
+      this.sortInfo.beforeIndex = dragIndex;
     },
     /**
      * 拖曳放下
@@ -117,14 +149,107 @@ export default {
      */
     drop(e, dropIndex) {
       e.dataTransfer.dropEffect = 'move';
+      this.sortInfo.afterIndex = dropIndex;
+      this.sortDirections();
+    },
+    /**
+     * 觸碰開始
+     *
+     * @param {number} startIndex - 觸碰物件的 index
+     */
+    touchstart(startIndex) {
+      this.sortInfo.beforeIndex = startIndex;
+      this.listItem.xPosition.start = $('.list-group').offset().left;
+      this.listItem.xPosition.end = $('.list-group').offset().left + $('.list-group').width();
+    },
+    /**
+     * 觸碰結束
+     *
+     * @param {Object} e - DOM
+     */
+    touchend(e) {
+      const touchEvent = e.touches[0] || e.changedTouches[0];
+      const endPageX = touchEvent.pageX;
+      const endPageY = touchEvent.pageY;
+
+      if (
+        endPageX >= this.listItem.xPosition.start
+        && endPageX < this.listItem.xPosition.end
+      ) {
+        let endPageYInRange = false;
+        this.listItem.yPosition.forEach((item, index) => {
+          if (
+            endPageY >= item.start
+            && endPageY < item.end
+          ) {
+            this.sortInfo.afterIndex = index;
+            this.sortDirections();
+            endPageYInRange = true;
+          }
+        });
+
+        if (!endPageYInRange) {
+          this.clearSoftInfo();
+        }
+      } else {
+        this.clearSoftInfo();
+      }
+    },
+    /**
+     * 觸碰移動到物件上時增加背景色
+     *
+     * @param {Object} e - DOM
+     */
+    touchmove(e) {
+      const touchEvent = e.touches[0] || e.changedTouches[0];
+      const endPageX = touchEvent.pageX;
+      const endPageY = touchEvent.pageY;
+
+      if (
+        endPageX >= this.listItem.xPosition.start
+        && endPageX < this.listItem.xPosition.end
+      ) {
+        let endPageYInRange = false;
+        this.listItem.yPosition.forEach((item, index) => {
+          if (
+            endPageY >= item.start
+            && endPageY < item.end
+          ) {
+            this.sortInfo.overIndex = index;
+            endPageYInRange = true;
+          }
+        });
+
+        if (!endPageYInRange) {
+          this.sortInfo.overIndex = null;
+        }
+      } else {
+        this.sortInfo.overIndex = null;
+      }
+    },
+    /**
+     * 重新排序規劃路線清單
+     */
+    sortDirections() {
+      if (this.sortInfo.beforeIndex === this.sortInfo.afterIndex) {
+        this.clearSoftInfo();
+        return;
+      }
       const newList = this.getDirectionsList.concat([]);
-      const dragIndex = e.dataTransfer.getData('text');
-      const dragItem = newList[dragIndex];
-      const dropItem = newList[dropIndex];
-      newList.splice(dragIndex, 1, dropItem);
-      newList.splice(dropIndex, 1, dragItem);
+      const beforeItem = newList[this.sortInfo.beforeIndex];
+      const afterItem = newList[this.sortInfo.afterIndex];
+      newList.splice(this.sortInfo.beforeIndex, 1, afterItem);
+      newList.splice(this.sortInfo.afterIndex, 1, beforeItem);
       this.updateDirections(newList);
-      this.overIndex = null;
+      this.clearSoftInfo();
+    },
+    /**
+     * 清空排序相關資料
+     */
+    clearSoftInfo() {
+      this.sortInfo.beforeIndex = null;
+      this.sortInfo.afterIndex = null;
+      this.sortInfo.overIndex = null;
     },
   },
   computed: {
@@ -137,6 +262,18 @@ export default {
         return true;
       }
       return false;
+    },
+  },
+  watch: {
+    listDisplay(newValue) {
+      if (newValue && this.checkListLength) {
+        $('body').addClass('modal-open');
+      } else {
+        $('body').removeClass('modal-open');
+      }
+    },
+    getDirectionsList() {
+      this.updatelistItemYPosition();
     },
   },
 };
