@@ -3,6 +3,7 @@
     class="directions d-flex align-items-end"
     :class="{'hide': !listDisplay || !checkListLength, 'show': listDisplay && checkListLength}"
   >
+    <div class="modal-backdrop fade" :class="{'show': listDisplay && checkListLength}"></div>
     <button
       type="button"
       class="btn shadow-none rounded-circle bthCar"
@@ -159,6 +160,9 @@ svg {
   &.show {
     right: 0;
     transition: right 1s;
+    .bthCar, .list-group {
+      z-index: $zindex-modal;
+    }
   }
   @include media-breakpoint-up(sm) {
     width: 90vw;
