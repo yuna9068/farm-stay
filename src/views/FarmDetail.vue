@@ -38,7 +38,7 @@
           <ul v-if="!noFarmInfo" class="p-3 text-break roundedCustom farmInfo">
             <li v-if="farm.AddrDisplay">
               <i class="fas fa-map-marker-alt"></i>
-              <a :href="mapUrl(farm.AddrDisplay)" target="_blank">
+              <a :href="mapUrl(farm.AddrDisplay)" target="_blank" rel="noreferrer noopener">
                 {{ farm.AddrDisplay }}
               </a>
             </li>
@@ -70,13 +70,13 @@
             </li>
             <li v-if="farm.FBUrl">
               <i class="fab fa-facebook"></i>
-              <a :href="farm.FBUrl" target="_blank">
+              <a :href="farm.FBUrl" target="_blank" rel="noreferrer noopener">
                 {{ farm.FBUrl }}
               </a>
             </li>
             <li v-if="farm.UrlDisplay">
               <i class="fas fa-globe"></i>
-              <a :href="farm.UrlDisplay" target="_blank">
+              <a :href="farm.UrlDisplay" target="_blank" rel="noreferrer noopener">
                 {{ farm.UrlDisplay }}
               </a>
             </li>

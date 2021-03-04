@@ -15,25 +15,25 @@
             <i class="fas fa-hands-helping"></i>
             版面設計參考：Ildiko 的 UI Design Daily 網站
           </h6>
-          <a href="https://www.uidesigndaily.com/posts/sketch-stock-photos-page-website-mockup-list-image-day-1132" target="_blank">首頁卡片樣式</a>
+          <a href="https://www.uidesigndaily.com/posts/sketch-stock-photos-page-website-mockup-list-image-day-1132" target="_blank" rel="noreferrer noopener">首頁卡片樣式</a>
           、
-          <a href="https://www.uidesigndaily.com/posts/sketch-website-section-day-1228" target="_blank">農場詳細資訊頁排版</a>
+          <a href="https://www.uidesigndaily.com/posts/sketch-website-section-day-1228" target="_blank" rel="noreferrer noopener">農場詳細資訊頁排版</a>
           、
-          <a href="https://www.uidesigndaily.com/posts/xd-gallery-mobile-day-284" target="_blank">手機首頁排版</a>
+          <a href="https://www.uidesigndaily.com/posts/xd-gallery-mobile-day-284" target="_blank" rel="noreferrer noopener">手機首頁排版</a>
         </li>
         <li>
           <h6>
             <i class="fas fa-hands-helping"></i>
             Icon：Font Awesome
           </h6>
-          <a href="https://fontawesome.com/" target="_blank">Font Awesome 5</a>
+          <a href="https://fontawesome.com/" target="_blank" rel="noreferrer noopener">Font Awesome 5</a>
         </li>
         <li>
           <h6>
             <i class="fas fa-hands-helping"></i>
             架設後端伺服器處理政府資料開放平臺 API CORS 跨域請求問題，並提供版面設計建議
           </h6>
-          <a href="https://github.com/terry90918" target="_blank">Terry Chen</a>
+          <a href="https://github.com/terry90918" target="_blank" rel="noreferrer noopener">Terry Chen</a>
         </li>
         <li>
           <h6>

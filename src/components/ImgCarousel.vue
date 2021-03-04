@@ -26,11 +26,17 @@
           :style="{'background-image': 'url(' + require(`@/assets/images/${img.photoName}`) + ')'}"
         />
         <div class="carousel-caption px-1">
-          <a :href="img.photoLink" target="_blank">Photo</a>
+          <a :href="img.photoLink" target="_blank" rel="noreferrer noopener">Photo</a>
           <span>&nbsp;by&nbsp;</span>
-          <a :href="img.authorLink" target="_blank">{{ img.authorName }}</a>
+          <a
+            :href="img.authorLink"
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            {{ img.authorName }}
+          </a>
           <span>&nbsp;on&nbsp;</span>
-          <a :href="img.webLink" target="_blank">{{ img.webName }}</a>
+          <a :href="img.webLink" target="_blank" rel="noreferrer noopener">{{ img.webName }}</a>
         </div>
       </div>
     </div>
