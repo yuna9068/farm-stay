@@ -97,6 +97,8 @@ export default {
     },
     /**
      * 移除加入規劃路線的地點
+     *
+     * @param {Object} farm - 農場資料
      */
     removeDirectionsItem(farm) {
       this.removeDirections(farm);

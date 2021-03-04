@@ -104,6 +104,8 @@ export default {
     ...mapActions(['updateSearchCondition', 'searchFarm']),
     /**
      * 選擇的縣市
+     *
+     * @param {Object} item - 縣市名及鄉鎮市區清單
      */
     selectCounty(item) {
       this.filterCounty = item.countyName;
@@ -112,6 +114,8 @@ export default {
     },
     /**
      * 選擇的鄉鎮市區
+     *
+     * @param {string}} item - 鄉鎮市區名
      */
     selectTown(item) {
       this.filterTown = item;

@@ -16,7 +16,7 @@
         <div class="col-12 col-md-7 col-lg-8">
           <!-- 景點照片 -->
           <div
-            class="mb-3 overflow-hidden roundedCustomer imgAutoResizeFrame"
+            class="mb-3 overflow-hidden roundedCustom imgAutoResizeFrame"
             :class="$isDefaultImg(farm.Image)"
           >
             <img v-if="farm.Image" :src="farm.Image" :alt="farm.Name" class="imgAutoResize">
@@ -27,7 +27,7 @@
           <hr v-if="farm.Content">
           <div
             v-if="farm.Content"
-            class="mb-3 text-secondary text-justify farmContent roundedCustomer"
+            class="mb-3 text-secondary text-justify farmContent roundedCustom"
           >{{ farm.Content }}</div>
         </div>
 
@@ -35,7 +35,7 @@
           <!-- 景點資訊 -->
           <h2 v-if="!noFarmInfo" class="h5">景點資訊</h2>
           <hr v-if="!noFarmInfo">
-          <ul v-if="!noFarmInfo" class="p-3 text-break roundedCustomer farmInfo">
+          <ul v-if="!noFarmInfo" class="p-3 text-break roundedCustom farmInfo">
             <li v-if="farm.AddrDisplay">
               <i class="fas fa-map-marker-alt"></i>
               <a :href="mapUrl(farm.AddrDisplay)" target="_blank">
@@ -103,13 +103,13 @@
             <button
               v-if="inFavoritesList"
               type="button"
-              class="btn w-100 shadow-none roundedCustomer btnRemove"
+              class="btn w-100 shadow-none roundedCustom btnRemove"
               @click="removeFavoritesItem()"
             >移出收藏景點</button>
             <button
               v-else
               type="button"
-              class="btn btn-outline-primary w-100 shadow-none roundedCustomer"
+              class="btn btn-outline-primary w-100 shadow-none roundedCustom"
               @click="addFavoritesItem()"
             >加入收藏景點</button>
           </div>
@@ -125,7 +125,7 @@
             :src="mapEmbed(farm.AddrDisplay)"
             width="600"
             height="450"
-            class="border-0 w-100 roundedCustomer"
+            class="border-0 w-100 roundedCustom"
             allowfullscreen
             loading="lazy"
           />
@@ -261,7 +261,7 @@ $btnRemoveColor: #f16c5d;
   color: $darkenPrimary;
 }
 
-.roundedCustomer {
+.roundedCustom {
   border-radius: 0.5rem;
 }
 

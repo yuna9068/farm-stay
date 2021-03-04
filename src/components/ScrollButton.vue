@@ -24,6 +24,9 @@ export default {
     this.scrollEvent();
   },
   methods: {
+    /**
+     * 監聽頁面滾動事件
+     */
     scrollEvent() {
       const navbarHeight = $('#navbarMain').innerHeight();
       $(window).scroll(() => {
@@ -34,11 +37,17 @@ export default {
         }
       });
     },
+    /**
+     * 回到網頁上方
+     */
     toTop() {
       $('html, body').animate({
         scrollTop: 0,
       }, 1000, 'linear');
     },
+    /**
+     * 移至網頁下方
+     */
     toBottom() {
       $('html, body').animate({
         scrollTop: document.body.scrollHeight,
