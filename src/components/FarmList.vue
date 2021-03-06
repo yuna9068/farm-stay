@@ -26,7 +26,7 @@
           >
           <div class="imgBlur" :style="{'background-image': `url('${farm.Image}')`}"/>
           <div class="card-img-overlay d-flex">
-            <h5 class="card-title mb-0 mr-auto">{{ farm.Name }}</h5>
+            <p class="card-title mb-0 mr-auto h5">{{ farm.Name }}</p>
             <div class="farmRegion ml-2 text-right">
               <p class="card-text mb-1 text-nowrap">{{ farm.CountyName }}</p>
               <p class="card-text text-nowrap">{{ farm.TownshipName }}</p>
@@ -35,6 +35,7 @@
           <button
             type="button"
             class="btn position-absolute p-0 border-0 rounded-circle d-flex shadow-none btnHeart"
+            aria-label="收藏景點"
             @click.stop="compareFavorites(farm.ID) ? removeItem(farm) : addItem(farm)"
           >
             <font-awesome-icon

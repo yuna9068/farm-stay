@@ -16,7 +16,7 @@
     </button>
 
     <router-link to="/" class="navbar-brand mx-auto">
-      <h1 class="text-primary">來到農村住一晚</h1>
+      <h1>來到農村住一晚</h1>
     </router-link>
 
     <div class="collapse navbar-collapse" id="navbarContent">
@@ -39,9 +39,11 @@
       @submit.prevent
     >
       <div class="input-group justify-content-end">
+        <label class="sr-only" for="inputSearch">搜尋農場名稱</label>
         <input
           type="text"
-          class="form-control inputSearch flex-grow-0"
+          id="inputSearch"
+          class="form-control flex-grow-0"
           :class="{'btn-outline-light searchActive': searchDisplay, 'p-0 border-0': !searchDisplay}"
           placeholder="搜尋農場名稱"
           aria-label="搜尋農場名稱"
@@ -142,6 +144,14 @@ h1 {
   font-size: 1.25rem;
   margin-bottom: initial;
   line-height: initial;
+  color: darken($primary, 4%);
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0, 0, 0, 0.7);
+  &:hover {
+    color: rgba(0, 0, 0, 1);
+  }
 }
 
 form {
@@ -153,7 +163,7 @@ form {
 }
 
 .input-group {
-  .inputSearch {
+  #inputSearch {
     width: 0px;
     transition: width 0.5s, padding 0.5s;
     &.searchActive {

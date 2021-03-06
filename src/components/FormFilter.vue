@@ -3,6 +3,7 @@
     <form @submit.prevent>
       <div class="form-row">
         <div class="form-group col-sm-3">
+          <label class="sr-only" for="filterKeyword">搜尋農場名稱</label>
           <input
             type="text"
             class="form-control shadow-none"
@@ -76,7 +77,7 @@
         <div class="form-group col-sm-3">
           <button
             type="button"
-            class="btn h-100 w-100 shadow-none font-weight-bold text-light btnKeyword"
+            class="btn h-100 w-100 shadow-none font-weight-bold btnKeyword"
             @click="search()"
           >
             查詢
@@ -153,14 +154,14 @@ export default {
 $filterColor: lighten($primary, 30%);
 $filterFontColor: #495057;
 $dropdownItemHoverBg: lighten($primary, 40%);
-$btnKeywordBg: lighten($primary, 10%);
 $textSpacing: 20px;
 
 .btnKeyword {
-  background: $btnKeywordBg;
+  background: darken($primary, 4%);
   letter-spacing: $textSpacing;
   text-indent: $textSpacing;
   white-space: nowrap;
+  color: #fdfeff;
   &:hover {
     background: $primary;
   }
