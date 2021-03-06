@@ -164,6 +164,7 @@ $textSpacing: 20px;
   color: #fdfeff;
   &:hover {
     background: $primary;
+    color: #fdfeff;
   }
 }
 
