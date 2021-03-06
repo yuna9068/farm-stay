@@ -99,7 +99,7 @@ export default {
      * @param {string} type - 目前要處理的方式
      */
     processingDisplayList(type) {
-      const addAmount = 30;
+      const addAmount = 21;
 
       if (type === 'newData') {
         // 更新篩選條件後取得新的 getFilterFarm，重置 displayList
