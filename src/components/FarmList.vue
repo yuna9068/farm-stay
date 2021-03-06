@@ -9,7 +9,7 @@
     </div>
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
       <div
-        v-for="farm in getFilterFarm"
+        v-for="farm in displayList"
         :key="farm.ID"
         class="col-11 col-md-6 mb-2 mb-sm-4"
       >
@@ -46,6 +46,14 @@
         </div>
       </div>
     </div>
+    <div class="d-flex flex-column align-items-center">
+      <div v-show="addLoading" class="spinner-border mt-2 mb-4 text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div v-show="allDataDisplayed" class="mt-2 mb-4 text-secondary">
+        <span class="allDataDisplayed">沒有更多資料了</span>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -54,8 +62,57 @@ import { mapActions, mapGetters } from 'vuex';
 
 export default {
   name: 'FarmList',
+  data() {
+    return {
+      displayList: [],
+      addLoading: false,
+    };
+  },
+  mounted() {
+    this.scrollEvent();
+    if (this.getFilterFarm.length > 0) {
+      this.processingDisplayList('newData');
+    }
+  },
   methods: {
     ...mapActions(['updateSelectedFarm', 'addFavorites', 'removeFavorites']),
+    /**
+     * 監聽頁面滾動事件
+     */
+    scrollEvent() {
+      $(window).scroll(() => {
+        const windowScrollPosition = $(window).scrollTop() + $(window).height();
+        const documentHeight = $(document).height();
+        if (
+          windowScrollPosition > (documentHeight - 200)
+          && this.getFilterFarm.length !== this.displayList.length
+        ) {
+          this.addLoading = true;
+          this.processingDisplayList('addData');
+        }
+      });
+    },
+    /**
+     * 處理要顯示在畫面上的資料數量
+     *
+     * @param {string} type - 目前要處理的方式
+     */
+    processingDisplayList(type) {
+      const addAmount = 30;
+
+      if (type === 'newData') {
+        // 更新篩選條件後取得新的 getFilterFarm，重置 displayList
+        this.displayList = [];
+        this.displayList = this.getFilterFarm.slice(0, addAmount);
+      } else if (type === 'addData') {
+        // 滾動至頁面底部時再分批載入資料
+        const displayListLength = this.displayList.length;
+        const endIndex = displayListLength + addAmount;
+        const concatData = this.getFilterFarm.slice(displayListLength, endIndex);
+        this.displayList = [...this.displayList, ...concatData];
+        this.addLoading = false;
+      }
+    },
     /**
      * 進入農場詳細資訊頁
      *
@@ -96,6 +153,22 @@ export default {
   },
   computed: {
     ...mapGetters(['getRegionList', 'getFilterFarm', 'getFavoritesList']),
+    /**
+     * 是否顯示訊息"沒有更多資料了"
+     */
+    allDataDisplayed() {
+      if (
+        this.getRegionList.length > 0
+        && this.getFilterFarm.length === this.displayList.length) {
+        return true;
+      }
+      return false;
+    },
+  },
+  watch: {
+    getFilterFarm() {
+      this.processingDisplayList('newData');
+    },
   },
 };
 </script>
@@ -131,6 +204,25 @@ export default {
   background: #ffffff;
   svg {
     height: 1rem;
+  }
+}
+
+.allDataDisplayed {
+  position: relative;
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 15vw;
+    height: 1px;
+    background: $secondary;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &::before {
+    left: -20vw;
+  }
+  &::after {
+    right: -20vw;
   }
 }
 

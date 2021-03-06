@@ -5,8 +5,7 @@
         href="#"
         class="nav-link rounded-0 text-nowrap"
         :class="{
-          'active': selected === item.countyName,
-          'd-none': item.countyName === '全部'
+          'active': selected === item.countyName
         }"
         @click="selectRegion(item)"
       >{{ item.countyName }}</a>
@@ -21,7 +20,7 @@ export default {
   name: 'NavRegion',
   data() {
     return {
-      selected: '',
+      selected: '全部',
     };
   },
   methods: {
@@ -40,13 +39,6 @@ export default {
   },
   computed: {
     ...mapGetters(['getRegionList']),
-  },
-  watch: {
-    getRegionList(newValue) {
-      if (newValue.length > 0) {
-        this.selectRegion(newValue[1]);
-      }
-    },
   },
 };
 </script>
