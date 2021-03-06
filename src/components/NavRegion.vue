@@ -47,7 +47,7 @@ export default {
 .nav-pills {
   .nav-link {
     position: relative;
-    color: #607d8b;
+    color: #5e7a88;
     &::after {
       content: '';
       position: absolute;

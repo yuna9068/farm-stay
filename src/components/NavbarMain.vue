@@ -46,7 +46,7 @@
           class="form-control flex-grow-0"
           :class="{'btn-outline-light searchActive': searchDisplay, 'p-0 border-0': !searchDisplay}"
           placeholder="搜尋農場名稱"
-          aria-label="搜尋農場名稱"
+          aria-label="搜尋農場名稱輸入框"
           aria-describedby="searchFarm"
           v-model="searchText"
           @keyup.enter.prevent
@@ -59,6 +59,7 @@
             }"
             type="button"
             id="searchFarm"
+            aria-label="搜尋農場名稱按鈕"
             @click="clickSearch()"
           >
             <i class="fas fa-search"></i>

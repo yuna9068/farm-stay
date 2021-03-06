@@ -28,7 +28,7 @@
         <div
           class="media-body col-6 col-sm-8 py-1 px-0 d-flex flex-column"
         >
-          <h6 class="text-truncate mb-3">{{ farm.Name }}</h6>
+          <p class="text-truncate mb-3 h6">{{ farm.Name }}</p>
 
           <div class="overflow-auto flex-grow-0 text-secondary text-justify h-50 farmContent">
             {{ farm.Content ? farm.Content : '景點未提供簡介內容'}}
