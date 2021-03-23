@@ -176,14 +176,24 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$easeOut: all 0.2s ease-out;
+$easeIn: all 0.1s ease-in;
+
 .card {
   height: 245px;
   cursor: pointer;
   box-shadow: $box-shadow-sm;
-  transition: all 0.1s ease-out;
+  transition: $easeOut;
+  .imgAutoResize {
+    transition: $easeOut;
+  }
   &:hover {
     box-shadow: 0 0 0.8rem rgba(0, 0, 0, 0.4);
-    transition: all 0.2s ease-in;
+    transition: $easeIn;
+    .imgAutoResize {
+      transform: scale(1.1);
+      transition: $easeIn;
+    }
   }
 }
 
@@ -204,8 +214,17 @@ export default {
   width: 2.5rem;
   height: 2.5rem;
   background: #ffffff;
+  transition: $easeOut;
   svg {
     height: 1rem;
+  }
+  &:hover {
+    box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.7) !important;
+    transition: $easeIn;
+    svg {
+      animation: heartBeat 0.6s infinite;
+      color: $danger !important;
+    }
   }
 }
 
@@ -238,6 +257,15 @@ export default {
     border-left: none;
     height: 40vh;
     min-height: 227px;
+  }
+}
+
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
   }
 }
 </style>
