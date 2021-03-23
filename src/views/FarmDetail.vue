@@ -1,5 +1,5 @@
 <template>
-  <div class="FarmDetail">
+  <div class="farmDetail">
     <div class="container-md">
       <!-- 麵包屑 -->
       <ol class="breadcrumb bg-transparent pl-0 mb-0">
@@ -257,6 +257,11 @@ export default {
 $darkenPrimary: darken($primary, 25%);
 $btnRemoveColor: #f16c5d;
 
+%animationAppearText {
+  opacity: 0;
+  animation: appearText 0.8s 0.8s 1 forwards;
+}
+
 .breadcrumb-item, .farmName {
   color: $darkenPrimary;
 }
@@ -266,6 +271,7 @@ $btnRemoveColor: #f16c5d;
 }
 
 .imgAutoResizeFrame {
+  animation: zoomImg 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   height: 200px;
   @include media-breakpoint-up(md) {
     height: 300px;
@@ -284,6 +290,7 @@ $btnRemoveColor: #f16c5d;
   li {
     display: flex;
     color: #ffffff;
+    @extend %animationAppearText;
     &:not(:last-child) {
       margin-bottom: 0.5rem;
     }
@@ -308,6 +315,7 @@ $btnRemoveColor: #f16c5d;
 
 .farmContent {
   letter-spacing: 0.2rem;
+  @extend %animationAppearText;
 }
 
 .btnRemove {
@@ -316,6 +324,26 @@ $btnRemoveColor: #f16c5d;
   &:hover {
     color: #ffffff;
     background: $btnRemoveColor;
+  }
+}
+
+@keyframes zoomImg {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes appearText {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 </style>
