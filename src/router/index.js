@@ -48,6 +48,22 @@ const routes = [
 
 const router = new VueRouter({
   routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (
+      to.name === 'Farm'
+      || to.name === 'Thanks'
+      || (to.name === 'Favorites' && from.name === 'Home')
+      || (to.name === 'Favorites' && from.name === 'Thanks')
+    ) {
+      // 滾軸回到最上方：
+      // * 進入農場詳細資訊頁
+      // * 進入特別感謝頁
+      // * 從首頁進入收藏景點頁
+      // * 從特別感謝頁進入收藏景點頁
+      return { x: 0, y: 0 };
+    }
+    return savedPosition;
+  },
 });
 
 export default router;
