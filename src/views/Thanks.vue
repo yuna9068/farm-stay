@@ -1,8 +1,8 @@
 <template>
   <div class="thanks">
     <div class="container-md">
-      <h1 class="h5 text-center py-5 mb-0">特別感謝下列資源，我才能完成這個網站</h1>
-      <ol class="list-unstyled mb-3 mx-auto thanksList">
+      <h1 class="h5 text-center py-4 mb-0">特別感謝下列資源，我才能完成這個網站</h1>
+      <ol class="list-unstyled pb-3 mx-auto mb-0 thanksList">
         <li>
           <p class="h6">
             <i class="fas fa-hands-helping"></i>
