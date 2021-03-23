@@ -1,6 +1,6 @@
 <template>
   <div class="container-md pt-3 d-none d-sm-block">
-    <form @submit.prevent>
+    <form v-show="getRegionList.length" @submit.prevent>
       <div class="form-row">
         <div class="form-group col-sm-3">
           <label class="sr-only" for="filterKeyword">搜尋農場名稱</label>
