@@ -160,6 +160,7 @@ export default {
     allDataDisplayed() {
       if (
         this.getRegionList.length > 0
+        && this.displayList.length > 0
         && this.getFilterFarm.length === this.displayList.length) {
         return true;
       }
