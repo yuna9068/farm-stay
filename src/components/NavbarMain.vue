@@ -1,7 +1,7 @@
 <template>
   <nav
     id="navbarMain"
-    class="navbar navbar-expand-sm navbar-light justify-content-center shadow-sm"
+    class="navbar navbar-expand-sm navbar-light justify-content-center shadow-sm fixed-top"
   >
     <button
       class="navbar-toggler position-absolute px-0 border-0 buttonMenu"
@@ -136,6 +136,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#navbarMain {
+  background: #ffffff;
+  min-height: 54px;
+}
+
 .buttonMenu {
   top: 0.5rem;
   left: 1rem;
