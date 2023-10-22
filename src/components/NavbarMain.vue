@@ -1,7 +1,7 @@
 <template>
   <nav
     id="navbarMain"
-    class="navbar navbar-expand-sm navbar-light justify-content-center shadow-sm fixed-top"
+    class="navbar navbar-expand-sm navbar-light justify-content-center shadow-sm"
   >
     <button
       class="navbar-toggler position-absolute px-0 border-0 buttonMenu"

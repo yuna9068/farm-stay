@@ -61,11 +61,6 @@ export default {
 <style lang="scss" scoped>
 $raindropColor: #42A5F5;
 
-.thanks {
-  min-height: calc(100vh - 56px);
-  background-color: rgba(0, 0, 0, 0.05);
-}
-
 .thanksList {
   width: fit-content;
   padding-left: 1.5rem;

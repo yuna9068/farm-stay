@@ -1,3 +1,20 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+
+  /* 僅在 Mac OS X / macOS 有效，避免文字鋸齒化 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  z-index: 1;
+}
+
 .defaultImg {
   position: relative;
   &::after {
@@ -14,10 +31,6 @@
     color: rgba(255, 255, 255, 0.7);
     background: rgba(0, 0, 0, 0.3);
   }
-}
-
-img {
-  z-index: 1;
 }
 
 .imgAutoResizeFrame {

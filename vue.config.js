@@ -24,7 +24,7 @@ module.exports = {
   css: {
     loaderOptions: {
       scss: {
-        additionalData: '@import "~@/assets/style/common.scss";@import "bootstrap/scss/bootstrap";',
+        additionalData: '@import "bootstrap/scss/bootstrap";@import "~@/assets/style/common.scss";',
       },
     },
   },

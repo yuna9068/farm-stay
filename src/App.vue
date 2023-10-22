@@ -2,7 +2,7 @@
   <div id="app">
     <NavbarMain/>
     <keep-alive>
-      <router-view/>
+      <router-view class="page" />
     </keep-alive>
     <ModalMessage/>
   </div>
@@ -137,9 +137,14 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-top: 56px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.page {
+  flex: 1;
+  overflow: scroll;
+  background-color: #f4f4f4;
 }
 </style>
