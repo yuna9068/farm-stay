@@ -31,7 +31,7 @@
         <li>
           <p class="h6">
             <i class="fas fa-hands-helping"></i>
-            架設後端伺服器處理政府資料開放平臺 API CORS 跨域請求問題，並提供版面設計建議
+            版面設計建議
           </p>
           <a href="https://github.com/terry90918" target="_blank" rel="noreferrer noopener">Terry Chen</a>
         </li>
