@@ -7,6 +7,7 @@
     >
       無符合查詢條件的資料
     </div>
+
     <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3">
       <div
         v-for="farm in displayList"
@@ -47,7 +48,8 @@
         </div>
       </div>
     </div>
-    <div class="d-flex flex-column align-items-center">
+
+    <div ref="listDisplayStatus" class="d-flex flex-column align-items-center">
       <div v-show="addLoading" class="spinner-border mt-2 mb-4 text-primary" role="status">
         <span class="sr-only">Loading...</span>
       </div>
@@ -70,7 +72,7 @@ export default {
     };
   },
   mounted() {
-    this.scrollEvent();
+    this.observeEvent();
     if (this.getFilterFarm.length > 0) {
       this.processingDisplayList('newData');
     }
@@ -78,20 +80,18 @@ export default {
   methods: {
     ...mapActions(['updateSelectedFarm', 'addFavorites', 'removeFavorites']),
     /**
-     * 監聽頁面滾動事件
+     * 觀察是否滑動到頁面底部，判斷是否要加載顯示更多資料
      */
-    scrollEvent() {
-      $(window).scroll(() => {
-        const windowScrollPosition = $(window).scrollTop() + $(window).height();
-        const documentHeight = $(document).height();
-        if (
-          windowScrollPosition > (documentHeight - 200)
-          && this.getFilterFarm.length !== this.displayList.length
-        ) {
+    observeEvent() {
+      const callback = () => {
+        if (this.getFilterFarm.length !== this.displayList.length) {
           this.addLoading = true;
           this.processingDisplayList('addData');
         }
-      });
+      };
+      const target = this.$refs.listDisplayStatus;
+      const observer = new IntersectionObserver(callback);
+      observer.observe(target);
     },
     /**
      * 處理要顯示在畫面上的資料數量

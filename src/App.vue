@@ -36,7 +36,7 @@ export default {
         this.getData();
       } else {
         const vm = this;
-        const apiFarm = 'https://machi-cat.herokuapp.com/api/farm-stay';
+        const apiFarm = './data/farm.json'; // 資料下載時間：2023-10-22
 
         $.ajax({
           method: 'GET',
